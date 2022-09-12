@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Lure.FiveDollarBill;
+package me.WesBag.Toontown.BattleCore.Gags.Lure.FiveDollarBill;
 
 import org.bukkit.Sound;
 

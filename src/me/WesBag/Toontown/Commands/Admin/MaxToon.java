@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.AdminCommands;
+package me.WesBag.Toontown.Commands.Admin;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -6,12 +6,12 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
-import me.WesBag.TTCore.BattleMenu.Toons.Toon;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonsController;
-import me.WesBag.TTCore.Commands.Prefixes;
-import me.WesBag.TTCore.Files.PlayerData;
-import me.WesBag.TTCore.Files.PlayerDataController;
+import me.WesBag.Toontown.BattleCore.BattleCore;
+import me.WesBag.Toontown.BattleCore.Toons.Toon;
+import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import me.WesBag.Toontown.Commands.Prefixes;
+import me.WesBag.Toontown.Files.PlayerData;
+import me.WesBag.Toontown.Files.PlayerDataController;
 import net.md_5.bungee.api.ChatColor;
 
 public class MaxToon implements CommandExecutor {

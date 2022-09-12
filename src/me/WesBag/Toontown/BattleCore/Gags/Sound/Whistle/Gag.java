@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Sound.Whistle;
+package me.WesBag.Toontown.BattleCore.Gags.Sound.Whistle;
 
 import org.bukkit.Sound;
 

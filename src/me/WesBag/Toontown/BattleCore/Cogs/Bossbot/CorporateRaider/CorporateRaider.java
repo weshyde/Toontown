@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.CorporateRaider;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.CorporateRaider;
 
 public class CorporateRaider {
 	public static final int[][] Canned = {

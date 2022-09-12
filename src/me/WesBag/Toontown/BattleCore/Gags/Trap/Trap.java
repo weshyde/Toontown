@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Trap;
+package me.WesBag.Toontown.BattleCore.Gags.Trap;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
@@ -12,10 +12,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
-import me.WesBag.TTCore.BattleMenu.Gags.Gag;
-import me.WesBag.TTCore.Files.BattleData;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.BattleCore;
+import me.WesBag.Toontown.BattleCore.Gags.Gag;
+import me.WesBag.Toontown.Files.BattleData;
 
 public class Trap {
 	

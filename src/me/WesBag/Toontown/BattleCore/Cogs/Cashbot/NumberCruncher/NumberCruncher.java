@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.NumberCruncher;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot.NumberCruncher;
 
 public class NumberCruncher {
 	

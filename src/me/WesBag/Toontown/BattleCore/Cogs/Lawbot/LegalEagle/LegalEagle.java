@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.LegalEagle;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.LegalEagle;
 
 public class LegalEagle {
 	public static final int[][] EvilEye = {

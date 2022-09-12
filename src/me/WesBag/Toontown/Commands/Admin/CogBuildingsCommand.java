@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.AdminCommands;
+package me.WesBag.Toontown.Commands.Admin;
 
 import java.util.Map.Entry;
 import java.io.File;
@@ -11,13 +11,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings.CogBuilding;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings.CogBuildingController;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogTrait.CogBuildingTrait;
-import me.WesBag.TTCore.Commands.Prefixes;
-import me.WesBag.TTCore.Files.DataFile;
-import me.WesBag.TTCore.SchematicUtils.SchematicPaster;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuilding;
+import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuildingController;
+import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
+import me.WesBag.Toontown.Commands.Prefixes;
+import me.WesBag.Toontown.Files.DataFile;
+import me.WesBag.Toontown.SchematicUtilities.SchematicPaster;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.md_5.bungee.api.ChatColor;

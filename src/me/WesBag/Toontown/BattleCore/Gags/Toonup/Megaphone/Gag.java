@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Toonup.Megaphone;
+package me.WesBag.Toontown.BattleCore.Gags.Toonup.Megaphone;
 
 import org.bukkit.Sound;
 

@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Sound.ElephantTrunk;
+package me.WesBag.Toontown.BattleCore.Gags.Sound.ElephantTrunk;
 
 import org.bukkit.Sound;
 

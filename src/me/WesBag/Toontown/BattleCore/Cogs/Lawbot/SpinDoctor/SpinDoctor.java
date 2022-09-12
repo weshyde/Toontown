@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.SpinDoctor;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.SpinDoctor;
 
 public class SpinDoctor {
 	public static final int[][] ParadigmShift = {

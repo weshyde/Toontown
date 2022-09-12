@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu;
+package me.WesBag.Toontown.BattleCore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,12 +16,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Cogs.Cog;
-import me.WesBag.TTCore.BattleMenu.Toons.Toon;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonsController;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Cogs.Cog;
+import me.WesBag.Toontown.BattleCore.Toons.Toon;
+import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
 import net.md_5.bungee.api.ChatColor;
-import me.WesBag.TTCore.BattleMenu.Gags.Gag;
+import me.WesBag.Toontown.BattleCore.Gags.Gag;
 
 public class CogBattle {
 	

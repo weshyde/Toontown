@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.ShortChange;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot.ShortChange;
 
 public class ShortChange {
 

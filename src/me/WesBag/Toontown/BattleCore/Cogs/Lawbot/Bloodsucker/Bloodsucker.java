@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.Bloodsucker;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.Bloodsucker;
 
 public class Bloodsucker {
 	public static final int[][] EvictionNotice = {

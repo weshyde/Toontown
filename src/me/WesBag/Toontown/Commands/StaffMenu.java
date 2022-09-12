@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands;
+package me.WesBag.Toontown.Commands;
 
 public class StaffMenu {
 

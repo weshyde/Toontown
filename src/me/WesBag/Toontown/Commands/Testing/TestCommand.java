@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.CommandTesting;
+package me.WesBag.Toontown.Commands.Testing;
 
 import java.io.File;
 
@@ -10,13 +10,13 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.Animations.CogAnimations.SpawnBuildingAnimation;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings.CogBuildingController;
-import me.WesBag.TTCore.Commands.Prefixes;
-import me.WesBag.TTCore.SchematicUtils.SchematicPaster;
-import me.WesBag.TTCore.Streets.StreetCogsLoader;
-import me.WesBag.TTCore.Streets.StreetsController;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.Animations.Cog.SpawnBuildingAnimation;
+import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuildingController;
+import me.WesBag.Toontown.Commands.Prefixes;
+import me.WesBag.Toontown.SchematicUtilities.SchematicPaster;
+import me.WesBag.Toontown.Streets.StreetCogsLoader;
+import me.WesBag.Toontown.Streets.StreetsController;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.ai.NavigatorParameters;
 import net.citizensnpcs.api.npc.NPC;

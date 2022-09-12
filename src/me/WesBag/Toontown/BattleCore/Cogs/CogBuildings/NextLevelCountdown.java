@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings;
+package me.WesBag.Toontown.BattleCore.Cogs.CogBuildings;
 
 import org.bukkit.scheduler.BukkitRunnable;
 

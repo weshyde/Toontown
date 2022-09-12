@@ -1,13 +1,13 @@
-package me.WesBag.TTCore.Commands.AdminCommands;
+package me.WesBag.Toontown.Commands.Admin;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
-import me.WesBag.TTCore.Commands.Prefixes;
-import me.WesBag.TTCore.Files.BattleData;
+import me.WesBag.Toontown.BattleCore.BattleCore;
+import me.WesBag.Toontown.Commands.Prefixes;
+import me.WesBag.Toontown.Files.BattleData;
 import net.md_5.bungee.api.ChatColor;
 
 public class StopAllBattles implements CommandExecutor {
@@ -18,14 +18,14 @@ public class StopAllBattles implements CommandExecutor {
 			Player player = (Player) sender;
 			if (label.equalsIgnoreCase("stopallbattles")) {
 				if (player.hasPermission("ttc.owner")) {
-					for (BattleData battleData : BattleMenu.allBattles) {
+					for (BattleData battleData : BattleCore.allBattles) {
 						battleData.sendAllMessage(ChatColor.BLUE + "[Battle] " + ChatColor.DARK_RED + "Sorry, all battles have been cancelled temporarily");
 						battleData.deleteAll();
 						battleData = null;
 					}
-					BattleMenu.allBattles.clear();
+					BattleCore.allBattles.clear();
 					sender.sendMessage(Prefixes.Admin + ChatColor.GREEN + " All battles have been stopped!");
-					sender.sendMessage("all battles amount: " + BattleMenu.allBattles.size());
+					sender.sendMessage("all battles amount: " + BattleCore.allBattles.size());
 				}
 				else {
 					player.sendMessage(Prefixes.NoPerm);

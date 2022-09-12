@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Toonup.JugglingBalls;
+package me.WesBag.Toontown.BattleCore.Gags.Toonup.JugglingBalls;
 
 import org.bukkit.Sound;
 

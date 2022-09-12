@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.PencilPusher;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.PencilPusher;
 
 public class PencilPusher {
 	public static final int[][] FountainPen = {

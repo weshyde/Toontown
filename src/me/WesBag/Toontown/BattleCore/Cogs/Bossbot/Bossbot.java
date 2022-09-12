@@ -1,8 +1,8 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot;
 
 import java.lang.reflect.InvocationTargetException;
 
-import me.WesBag.TTCore.Main;
+import me.WesBag.Toontown.Main;
 
 public class Bossbot {
 	Main main;

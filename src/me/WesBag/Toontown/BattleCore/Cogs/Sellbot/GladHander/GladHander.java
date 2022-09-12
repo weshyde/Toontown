@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.GladHander;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot.GladHander;
 
 public class GladHander {
 

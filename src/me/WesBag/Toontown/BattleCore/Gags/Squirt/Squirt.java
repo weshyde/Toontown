@@ -1,11 +1,11 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Squirt;
+package me.WesBag.Toontown.BattleCore.Gags.Squirt;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
 import org.bukkit.Sound;
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Gags.Gag;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Gags.Gag;
 
 public class Squirt {
 	

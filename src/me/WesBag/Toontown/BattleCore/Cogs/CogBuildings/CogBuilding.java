@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings;
+package me.WesBag.Toontown.BattleCore.Cogs.CogBuildings;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -15,17 +15,17 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
-import me.WesBag.TTCore.BattleMenu.Cogs.Cog;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogsController;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogTrait.CogBuildingTrait;
-import me.WesBag.TTCore.BattleMenu.Toons.Toon;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonsController;
-import me.WesBag.TTCore.Files.BattleData;
-import me.WesBag.TTCore.Files.DataFile;
-import me.WesBag.TTCore.SchematicUtils.SchematicPaster;
-import me.WesBag.TTCore.Tasks.CustomEvents.PlayerDestroyBuildingEvent;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.BattleCore;
+import me.WesBag.Toontown.BattleCore.Cogs.Cog;
+import me.WesBag.Toontown.BattleCore.Cogs.CogsController;
+import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
+import me.WesBag.Toontown.BattleCore.Toons.Toon;
+import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import me.WesBag.Toontown.Files.BattleData;
+import me.WesBag.Toontown.Files.DataFile;
+import me.WesBag.Toontown.SchematicUtilities.SchematicPaster;
+import me.WesBag.Toontown.Tasks.CustomEvents.PlayerDestroyBuildingEvent;
 import net.citizensnpcs.Citizens;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -244,7 +244,7 @@ public class CogBuilding {
 		
 		this.battleData = new BattleData(main, playersIn, npcs, location.clone(), true, this);
 		//REMEMBER TO CHANGE BATTLEDATA LOCATION WHEN PLAYERS MOVE FLOORS
-		BattleMenu.allBattles.add(battleData);
+		BattleCore.allBattles.add(battleData);
 		for (Cog cog : allCogs) {
 			this.battleData.addCog(cog.getUUID(), cog);
 		}
@@ -256,7 +256,7 @@ public class CogBuilding {
 			tempToon.getToon().teleport(playerBattleLocations.get(i));
 	
 			tempToon.getToon().getInventory().setContents(tempToon.getGag2Inventory().getContents());
-			BattleMenu.openInventoryLater(tempToon.getToon(), tempToon.getGagInventory());
+			BattleCore.openInventoryLater(tempToon.getToon(), tempToon.getGagInventory());
 		}
 	}
 	
@@ -335,7 +335,7 @@ public class CogBuilding {
 			tempToon.getToon().teleport(playerBattleLocations.get(i));
 			
 			tempToon.getToon().getInventory().setContents(tempToon.getGag2Inventory().getContents());
-			BattleMenu.openInventoryLater(tempToon.getToon(), tempToon.getGagInventory());
+			BattleCore.openInventoryLater(tempToon.getToon(), tempToon.getGagInventory());
 		}
 	}
 	

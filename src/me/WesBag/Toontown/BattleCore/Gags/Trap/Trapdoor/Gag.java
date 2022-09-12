@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Trap.Trapdoor;
+package me.WesBag.Toontown.BattleCore.Gags.Trap.Trapdoor;
 
 import org.bukkit.Sound;
 

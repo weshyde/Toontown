@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.Telemarketer;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot.Telemarketer;
 
 public class Telemarketer {
 

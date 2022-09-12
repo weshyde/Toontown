@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands;
+package me.WesBag.Toontown.Commands;
 
 import net.md_5.bungee.api.ChatColor;
 

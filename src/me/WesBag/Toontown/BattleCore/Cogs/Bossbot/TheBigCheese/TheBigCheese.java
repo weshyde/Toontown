@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.TheBigCheese;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.TheBigCheese;
 
 public class TheBigCheese {
 	public static final int[][] TeeOff = {

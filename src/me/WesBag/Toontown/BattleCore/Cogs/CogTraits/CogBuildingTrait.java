@@ -1,8 +1,8 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.CogTrait;
+package me.WesBag.Toontown.BattleCore.Cogs.CogTraits;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
-import me.WesBag.TTCore.Main;
+import me.WesBag.Toontown.Main;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.api.persistence.Persist;
 import net.citizensnpcs.api.trait.Trait;

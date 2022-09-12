@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Throw.FruitPie;
+package me.WesBag.Toontown.BattleCore.Gags.Throw.FruitPie;
 
 import org.bukkit.Sound;
 

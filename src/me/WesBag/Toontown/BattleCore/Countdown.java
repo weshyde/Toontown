@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu;
+package me.WesBag.Toontown.BattleCore;
 
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;

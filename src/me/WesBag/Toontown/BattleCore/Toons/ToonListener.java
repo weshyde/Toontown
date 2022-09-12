@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Toons;
+package me.WesBag.Toontown.BattleCore.Toons;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -8,7 +8,7 @@ import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerKickEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
+import me.WesBag.Toontown.BattleCore.BattleCore;
 
 public class ToonListener implements Listener {
 	
@@ -30,8 +30,8 @@ public class ToonListener implements Listener {
 	public void onToonLeave(PlayerQuitEvent e) {
 		Toon tempToon = ToonsController.allToons.get(e.getPlayer().getUniqueId());
 		
-		if (BattleMenu.getBattleDataPlayer(e.getPlayer()) != null)
-			if (BattleMenu.getBattleDataPlayer(e.getPlayer()).isSpecialMode()) //Cog Building, Factory, Boss battle, etc
+		if (BattleCore.getBattleDataPlayer(e.getPlayer()) != null)
+			if (BattleCore.getBattleDataPlayer(e.getPlayer()).isSpecialMode()) //Cog Building, Factory, Boss battle, etc
 				tempToon.killToon();
 		
 		ToonsController.allToons.remove(e.getPlayer().getUniqueId());

@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Drop.BigWeight;
+package me.WesBag.Toontown.BattleCore.Gags.Drop.BigWeight;
 
 import org.bukkit.Sound;
 

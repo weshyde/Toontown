@@ -1,13 +1,13 @@
-package me.WesBag.TTCore.Commands.CommandTesting;
+package me.WesBag.Toontown.Commands.Testing;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.Animations.ToonAnimations.TeleportAnimation;
-import me.WesBag.TTCore.Commands.Prefixes;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.Animations.Toon.TeleportAnimation;
+import me.WesBag.Toontown.Commands.Prefixes;
 
 public class TeleportAnimationTest implements CommandExecutor {
 	

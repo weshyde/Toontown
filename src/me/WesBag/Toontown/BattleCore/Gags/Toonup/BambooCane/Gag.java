@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Toonup.BambooCane;
+package me.WesBag.Toontown.BattleCore.Gags.Toonup.BambooCane;
 
 import org.bukkit.Sound;
 

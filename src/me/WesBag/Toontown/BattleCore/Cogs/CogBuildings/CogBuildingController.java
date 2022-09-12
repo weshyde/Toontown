@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings;
+package me.WesBag.Toontown.BattleCore.Cogs.CogBuildings;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -26,11 +26,11 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogsController;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogTrait.CogBuildingTrait;
-import me.WesBag.TTCore.SchematicUtils.SchematicPaster;
-import me.WesBag.TTCore.SchematicUtils.SchematicSaver;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Cogs.CogsController;
+import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
+import me.WesBag.Toontown.SchematicUtilities.SchematicPaster;
+import me.WesBag.Toontown.SchematicUtilities.SchematicSaver;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.npc.ai.NPCHolder;
 import net.citizensnpcs.api.npc.NPC;

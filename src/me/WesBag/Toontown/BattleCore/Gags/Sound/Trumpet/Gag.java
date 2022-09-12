@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Sound.Trumpet;
+package me.WesBag.Toontown.BattleCore.Gags.Sound.Trumpet;
 
 import org.bukkit.Sound;
 

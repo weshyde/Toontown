@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.BackStabber;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.BackStabber;
 
 public class BackStabber {
 	public static final int[][] GuiltTrip = {

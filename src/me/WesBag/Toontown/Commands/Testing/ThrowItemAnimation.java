@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.CommandTesting;
+package me.WesBag.Toontown.Commands.Testing;
 
 import org.bukkit.Material;
 import org.bukkit.Sound;
@@ -10,8 +10,8 @@ import org.bukkit.entity.Snowball;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import me.WesBag.TTCore.Commands.Prefixes;
-import me.WesBag.TTCore.Commands.AdminCommands.IsIntUtil;
+import me.WesBag.Toontown.Commands.Prefixes;
+import me.WesBag.Toontown.Commands.Admin.IsIntUtil;
 import net.md_5.bungee.api.ChatColor;
 
 public class ThrowItemAnimation implements CommandExecutor {

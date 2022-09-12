@@ -1,6 +1,6 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot;
 
-import me.WesBag.TTCore.Main;
+import me.WesBag.Toontown.Main;
 
 public class Sellbot {
 	Main main;

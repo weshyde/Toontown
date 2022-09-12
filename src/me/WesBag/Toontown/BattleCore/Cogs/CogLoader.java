@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs;
+package me.WesBag.Toontown.BattleCore.Cogs;
 
 import java.util.HashMap;
 import java.util.Map;

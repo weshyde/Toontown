@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Trap.Railroad;
+package me.WesBag.Toontown.BattleCore.Gags.Trap.Railroad;
 
 public class Gag {
 	public int minDamage = 195;

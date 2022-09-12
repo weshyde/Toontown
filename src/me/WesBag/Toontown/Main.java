@@ -11,54 +11,54 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
-import me.WesBag.TTCore.BattleMenu.Countdown;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings.CogBuildingController;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogTrait.CogBuildingTrait;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonListener;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonsController;
-import me.WesBag.TTCore.Commands.AdminCommands.ChangeSkin;
-import me.WesBag.TTCore.Commands.AdminCommands.CogBuildingsCommand;
-import me.WesBag.TTCore.Commands.AdminCommands.FishingBucketMenuCommand;
-import me.WesBag.TTCore.Commands.AdminCommands.GiveJellybeans;
-import me.WesBag.TTCore.Commands.AdminCommands.HealLaff;
-import me.WesBag.TTCore.Commands.AdminCommands.MaxToon;
-import me.WesBag.TTCore.Commands.AdminCommands.MaxTrack;
-import me.WesBag.TTCore.Commands.AdminCommands.ResetGags;
-import me.WesBag.TTCore.Commands.AdminCommands.SetGag;
-import me.WesBag.TTCore.Commands.AdminCommands.SetGagAmount;
-import me.WesBag.TTCore.Commands.AdminCommands.SetGagExp;
-import me.WesBag.TTCore.Commands.AdminCommands.SetGagMax;
-import me.WesBag.TTCore.Commands.AdminCommands.SetJellybeans;
-import me.WesBag.TTCore.Commands.AdminCommands.SetLaff;
-import me.WesBag.TTCore.Commands.AdminCommands.StartInvasion;
-import me.WesBag.TTCore.Commands.AdminCommands.StopAllBattles;
-import me.WesBag.TTCore.Commands.AdminCommands.StreetsControllerCommand;
-import me.WesBag.TTCore.Commands.CommandTesting.TeleportAnimationTest;
-import me.WesBag.TTCore.Commands.CommandTesting.TestCommand;
-import me.WesBag.TTCore.Commands.CommandTesting.ThrowItemAnimation;
-import me.WesBag.TTCore.Commands.PlayerCommands.BookCommand;
-import me.WesBag.TTCore.Files.BattleData;
-import me.WesBag.TTCore.Files.DataFile;
-import me.WesBag.TTCore.Files.PlayerData;
-import me.WesBag.TTCore.Files.PlayerDataController;
-import me.WesBag.TTCore.Fishing.FishController;
-import me.WesBag.TTCore.Fishing.FishingController;
-import me.WesBag.TTCore.GagShop.GagShopListener;
-import me.WesBag.TTCore.Listeners.PlayerDamageCanceller;
-import me.WesBag.TTCore.Listeners.PlaygroundChanges;
-import me.WesBag.TTCore.ShtickerBook.ShtickerBook;
-import me.WesBag.TTCore.Streets.StreetsController;
-import me.WesBag.TTCore.Tasks.Tasks;
-import me.WesBag.TTCore.Tasks.TasksController;
-import me.WesBag.TTCore.Tasks.GUI.TasksGUI;
-import me.WesBag.TTCore.Trolley.TrolleyListener;
-import me.WesBag.TTCore.Trolley.Minigames.CannonGame.CGListener;
-import me.WesBag.TTCore.Trolley.Minigames.CannonGame.CannonGame;
-import me.WesBag.TTCore.Trolley.Minigames.IceSlide.ISListener;
-import me.WesBag.TTCore.Trolley.Minigames.IceSlide.IceSlide;
-import me.WesBag.TTCore.Trolley.Utils.GameManager;
-import me.WesBag.TTCore.Tutorial.Tutorial;
+import me.WesBag.Toontown.BattleCore.BattleCore;
+import me.WesBag.Toontown.BattleCore.Countdown;
+import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuildingController;
+import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
+import me.WesBag.Toontown.BattleCore.Toons.ToonListener;
+import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import me.WesBag.Toontown.Commands.Admin.ChangeSkin;
+import me.WesBag.Toontown.Commands.Admin.CogBuildingsCommand;
+import me.WesBag.Toontown.Commands.Admin.FishingBucketMenuCommand;
+import me.WesBag.Toontown.Commands.Admin.GiveJellybeans;
+import me.WesBag.Toontown.Commands.Admin.HealLaff;
+import me.WesBag.Toontown.Commands.Admin.MaxToon;
+import me.WesBag.Toontown.Commands.Admin.MaxTrack;
+import me.WesBag.Toontown.Commands.Admin.ResetGags;
+import me.WesBag.Toontown.Commands.Admin.SetGag;
+import me.WesBag.Toontown.Commands.Admin.SetGagAmount;
+import me.WesBag.Toontown.Commands.Admin.SetGagExp;
+import me.WesBag.Toontown.Commands.Admin.SetGagMax;
+import me.WesBag.Toontown.Commands.Admin.SetJellybeans;
+import me.WesBag.Toontown.Commands.Admin.SetLaff;
+import me.WesBag.Toontown.Commands.Admin.StartInvasion;
+import me.WesBag.Toontown.Commands.Admin.StopAllBattles;
+import me.WesBag.Toontown.Commands.Admin.StreetsControllerCommand;
+import me.WesBag.Toontown.Commands.Testing.TeleportAnimationTest;
+import me.WesBag.Toontown.Commands.Testing.TestCommand;
+import me.WesBag.Toontown.Commands.Testing.ThrowItemAnimation;
+import me.WesBag.Toontown.Commands.Player.BookCommand;
+import me.WesBag.Toontown.Files.BattleData;
+import me.WesBag.Toontown.Files.DataFile;
+import me.WesBag.Toontown.Files.PlayerData;
+import me.WesBag.Toontown.Files.PlayerDataController;
+import me.WesBag.Toontown.Fishing.FishController;
+import me.WesBag.Toontown.Fishing.FishingController;
+import me.WesBag.Toontown.GagShop.GagShopListener;
+import me.WesBag.Toontown.Listeners.PlayerDamageCanceller;
+import me.WesBag.Toontown.Listeners.PlaygroundChanges;
+import me.WesBag.Toontown.BattleCore.Toons.ShtickerBook.ShtickerBook;
+import me.WesBag.Toontown.Streets.StreetsController;
+import me.WesBag.Toontown.Tasks.Tasks;
+import me.WesBag.Toontown.Tasks.TasksController;
+import me.WesBag.Toontown.Tasks.GUI.TasksGUI;
+import me.WesBag.Toontown.Trolley.TrolleyListener;
+import me.WesBag.Toontown.Trolley.Minigames.CannonGame.CGListener;
+import me.WesBag.Toontown.Trolley.Minigames.CannonGame.CannonGame;
+import me.WesBag.Toontown.Trolley.Minigames.IceSlide.ISListener;
+import me.WesBag.Toontown.Trolley.Minigames.IceSlide.IceSlide;
+import me.WesBag.Toontown.Trolley.Utilities.GameManager;
+import me.WesBag.Toontown.Tutorial.Tutorial;
 import me.blackvein.quests.Quests;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPCRegistry;
@@ -70,18 +70,18 @@ public class Main extends JavaPlugin implements Listener {
 	public Quests qp;
 	public PlayerData data2;
 	//This is a test 
-	public BattleMenu battleMenu;
+	public BattleCore battleCore;
 	public Logger log;
 	//public BattleData battleData;
 	public static DataFile dataFile;
 	public NPCRegistry registry;
 	//public CogsController cogs;
-	//public BattleMenu battle;
+	//public BattleCore battle;
 	public Countdown timer1;
 	//public static DataFile dataFile;
 	private static Main instance;
 	
-	//public BattleMenu battle = new BattleMenu(data, main);
+	//public BattleCore battle = new BattleCore(data, main);
 	
 	
 	
@@ -97,7 +97,7 @@ public class Main extends JavaPlugin implements Listener {
 		this.getServer().getPluginManager().registerEvents(this, this);
 		getServer().getPluginManager().registerEvents(new PlayerDamageCanceller(), this);
 		getServer().getPluginManager().registerEvents(new PlaygroundChanges(), this);
-		getServer().getPluginManager().registerEvents(new BattleMenu(this), this);
+		getServer().getPluginManager().registerEvents(new BattleCore(this), this);
 		
 		getServer().getPluginManager().registerEvents(new Tutorial(this), this);
 		getServer().getPluginManager().registerEvents(new PlayerDataController(this), this);
@@ -200,8 +200,8 @@ public class Main extends JavaPlugin implements Listener {
 		
 		
 		
-		//battle = new me.WesBag.TTCore.BattleMenu.BattleMenu(this, data);
-		//cogs = new me.WesBag.TTCore.BattleMenu.Cogs.CogsController(this);
+		//battle = new me.WesBag.TTCore.BattleCore.BattleCore(this, data);
+		//cogs = new me.WesBag.TTCore.BattleCore.Cogs.CogsController(this);
 		
 		if (!dataFile.getData().contains("locations.")) {
 			String[] tempLocationNames = {"ttc", "dd", "dg", "mml", "b", "ddl", "sb", "cb", "lb", "bb"};
@@ -288,7 +288,7 @@ public class Main extends JavaPlugin implements Listener {
 				if (player.hasPermission("ttc.admin")) {
 					//battle.removePlayerFromBattle(player.getUniqueId());
 					//BattleData.removePlayerBattle(player.getUniqueId());
-					BattleData battleData = BattleMenu.getBattleDataPlayer(player);
+					BattleData battleData = BattleCore.getBattleDataPlayer(player);
 					battleData.removePlayer(player.getUniqueId());
 					return true;
 				}

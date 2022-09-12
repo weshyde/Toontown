@@ -1,6 +1,6 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot;
 
-import me.WesBag.TTCore.Main;
+import me.WesBag.Toontown.Main;
 
 public class Cashbot {
 	Main main;

@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.HeadHunter;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.HeadHunter;
 
 public class HeadHunter {
 	public static final int[][] FountainPen = {

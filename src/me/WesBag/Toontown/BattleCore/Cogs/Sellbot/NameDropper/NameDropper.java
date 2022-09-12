@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.NameDropper;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot.NameDropper;
 
 public class NameDropper {
 

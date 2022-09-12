@@ -1,11 +1,11 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Throw;
+package me.WesBag.Toontown.BattleCore.Gags.Throw;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
 import org.bukkit.Sound;
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Gags.Gag;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Gags.Gag;
 
 public class Throw {
 	//Main main;

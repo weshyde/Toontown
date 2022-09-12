@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Squirt.StormCloud;
+package me.WesBag.Toontown.BattleCore.Gags.Squirt.StormCloud;
 
 import org.bukkit.Sound;
 

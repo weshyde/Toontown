@@ -1,13 +1,13 @@
-package me.WesBag.TTCore.Commands.PlayerCommands;
+package me.WesBag.Toontown.Commands.Player;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.BattleMenu.Toons.Toon;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonsController;
-import me.WesBag.TTCore.ShtickerBook.ShtickerBook;
+import me.WesBag.Toontown.BattleCore.Toons.Toon;
+import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import me.WesBag.Toontown.BattleCore.Toons.ShtickerBook.ShtickerBook;
 
 public class BookCommand implements CommandExecutor {
 	

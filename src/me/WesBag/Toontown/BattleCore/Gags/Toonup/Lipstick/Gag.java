@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Toonup.Lipstick;
+package me.WesBag.Toontown.BattleCore.Gags.Toonup.Lipstick;
 
 import org.bukkit.Sound;
 

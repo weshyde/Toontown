@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.BottomFeeder;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.BottomFeeder;
 
 public class BottomFeeder {
 	public static final int[][] RubberStamp = {

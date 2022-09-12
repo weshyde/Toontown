@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags;
+package me.WesBag.Toontown.BattleCore.Gags;
 
 import java.util.UUID;
 

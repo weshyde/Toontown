@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.AdminCommands;
+package me.WesBag.Toontown.Commands.Admin;
 
 import java.util.UUID;
 
@@ -8,9 +8,9 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonsController;
-import me.WesBag.TTCore.Commands.Prefixes;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import me.WesBag.Toontown.Commands.Prefixes;
 import net.md_5.bungee.api.ChatColor;
 
 public class CheckTTCore implements CommandExecutor {

@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Toonup.HighDive;
+package me.WesBag.Toontown.BattleCore.Gags.Toonup.HighDive;
 
 import org.bukkit.Sound;
 

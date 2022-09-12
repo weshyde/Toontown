@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.Flunky;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.Flunky;
 
 public class Flunky {
 	public static final int numOfAttacks = 3;

@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Toons;
+package me.WesBag.Toontown.BattleCore.Toons;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -20,14 +20,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
-import me.WesBag.TTCore.Commands.AdminCommands.IsIntUtil;
-import me.WesBag.TTCore.Files.CogType;
-import me.WesBag.TTCore.Files.PlayerData;
-import me.WesBag.TTCore.Files.PlayerDataController;
-import me.WesBag.TTCore.Fishing.FishController;
-import me.WesBag.TTCore.Skins.SkinGrabber;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.BattleCore;
+import me.WesBag.Toontown.Commands.Admin.IsIntUtil;
+import me.WesBag.Toontown.Files.CogType;
+import me.WesBag.Toontown.Files.PlayerData;
+import me.WesBag.Toontown.Files.PlayerDataController;
+import me.WesBag.Toontown.Fishing.FishController;
+import me.WesBag.Toontown.Skins.SkinGrabber;
 import me.blackvein.quests.Quests;
 import net.md_5.bungee.api.ChatColor;
 
@@ -635,7 +635,7 @@ public class Toon {
 						tempAdd = 0 + tempAdd;
 					newGagAmount += tempAdd;
 				}
-				playerData.getPlayerData().set("gags." + BattleMenu.gagNames[0][i] + "-amount", newGagAmount);
+				playerData.getPlayerData().set("gags." + BattleCore.gagNames[0][i] + "-amount", newGagAmount);
 			}
 		}	
 			//if (playerData.getPlayerData().contains("laff")) {
@@ -720,7 +720,7 @@ public class Toon {
 		if (toonShtickerBook.get(page) != null) {
 			toon.getInventory().clear();
 			toon.playSound(toon.getLocation(), Sound.ITEM_BOOK_PAGE_TURN, 1f, 1f);
-			BattleMenu.openInventoryLater(toon, toonShtickerBook.get(page));
+			BattleCore.openInventoryLater(toon, toonShtickerBook.get(page));
 			if (page == 1) //Sets player inv with drop gags
 				toon.getInventory().setContents(toonGagInv2.getContents());
 			if (page != 0) //If first page, no previous page button

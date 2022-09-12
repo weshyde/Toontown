@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.PennyPincher;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot.PennyPincher;
 
 public class PennyPincher {
 

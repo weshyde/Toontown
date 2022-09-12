@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.RobberBaron;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot.RobberBaron;
 
 public class RobberBaron {
 	

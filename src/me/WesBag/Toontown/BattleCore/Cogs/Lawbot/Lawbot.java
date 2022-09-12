@@ -1,6 +1,6 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot;
 
-import me.WesBag.TTCore.Main;
+import me.WesBag.Toontown.Main;
 
 public class Lawbot {
 	Main main;

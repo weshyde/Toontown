@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.Downsizer;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.Downsizer;
 
 public class Downsizer {
 	public static final int[][] Canned = {

@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Rewards;
+package me.WesBag.Toontown.BattleCore.Rewards;
 
 public class SOSCard {
 	

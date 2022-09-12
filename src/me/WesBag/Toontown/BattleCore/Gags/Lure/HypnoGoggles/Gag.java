@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Lure.HypnoGoggles;
+package me.WesBag.Toontown.BattleCore.Gags.Lure.HypnoGoggles;
 
 import org.bukkit.Sound;
 

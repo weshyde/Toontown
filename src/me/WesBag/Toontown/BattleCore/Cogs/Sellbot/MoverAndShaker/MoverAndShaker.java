@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.MoverAndShaker;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot.MoverAndShaker;
 
 public class MoverAndShaker {
 	public static final int[][] BrainStorm = {

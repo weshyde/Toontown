@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.AdminCommands;
+package me.WesBag.Toontown.Commands.Admin;
 
 public class IsIntUtil {
 	public static boolean isInt(String s) {

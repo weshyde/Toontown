@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.CogBuildings;
+package me.WesBag.Toontown.BattleCore.Cogs.CogBuildings;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +8,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.WesBag.TTCore.BattleMenu.Cogs.CogsController;
-import me.WesBag.TTCore.BattleMenu.Cogs.CogTrait.CogBuildingTrait;
+import me.WesBag.Toontown.BattleCore.Cogs.CogsController;
+import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
 import net.citizensnpcs.api.npc.NPC;
 import net.md_5.bungee.api.ChatColor;
 

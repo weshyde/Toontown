@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.AdminCommands;
+package me.WesBag.Toontown.Commands.Admin;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +9,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.Commands.Prefixes;
-import me.WesBag.TTCore.Streets.StreetCogsLoader;
+import me.WesBag.Toontown.Commands.Prefixes;
+import me.WesBag.Toontown.Streets.StreetCogsLoader;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.md_5.bungee.api.ChatColor;

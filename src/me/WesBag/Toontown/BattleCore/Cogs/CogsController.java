@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs;
+package me.WesBag.Toontown.BattleCore.Cogs;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,11 +10,11 @@ import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.Bossbot;
-import me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.Cashbot;
-import me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.Lawbot;
-import me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.Sellbot;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Cogs.Bossbot.Bossbot;
+import me.WesBag.Toontown.BattleCore.Cogs.Cashbot.Cashbot;
+import me.WesBag.Toontown.BattleCore.Cogs.Lawbot.Lawbot;
+import me.WesBag.Toontown.BattleCore.Cogs.Sellbot.Sellbot;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 

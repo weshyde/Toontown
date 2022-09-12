@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Lure.BigMagnet;
+package me.WesBag.Toontown.BattleCore.Gags.Lure.BigMagnet;
 
 import org.bukkit.Sound;
 

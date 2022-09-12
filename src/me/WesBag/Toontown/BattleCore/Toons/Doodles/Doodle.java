@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Doodles;
+package me.WesBag.Toontown.BattleCore.Toons.Doodles;
 
 import java.util.UUID;
 

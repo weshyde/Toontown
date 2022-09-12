@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.Yesman;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.Yesman;
 
 public class Yesman {
 	

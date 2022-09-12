@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Toonup.PixieDust;
+package me.WesBag.Toontown.BattleCore.Gags.Toonup.PixieDust;
 
 import org.bukkit.Sound;
 

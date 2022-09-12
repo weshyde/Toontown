@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.TheMingler;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot.TheMingler;
 
 public class TheMingler {
 

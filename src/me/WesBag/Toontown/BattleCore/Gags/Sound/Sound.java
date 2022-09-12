@@ -1,10 +1,10 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Sound;
+package me.WesBag.Toontown.BattleCore.Gags.Sound;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Gags.Gag;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Gags.Gag;
 
 public class Sound {
 	

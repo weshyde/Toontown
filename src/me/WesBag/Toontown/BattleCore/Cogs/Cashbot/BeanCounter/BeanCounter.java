@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.BeanCounter;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot.BeanCounter;
 
 public class BeanCounter {
 

@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.Tightwad;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot.Tightwad;
 
 public class Tightwad {
 

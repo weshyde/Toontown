@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.MrHollywood;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot.MrHollywood;
 
 public class MrHollywood {
 	

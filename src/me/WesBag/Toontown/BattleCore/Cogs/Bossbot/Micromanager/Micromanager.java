@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Bossbot.Micromanager;
+package me.WesBag.Toontown.BattleCore.Cogs.Bossbot.Micromanager;
 
 public class Micromanager {
 	public static final int[][] Demotion = {

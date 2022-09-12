@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.DoubleTalker;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.DoubleTalker;
 
 public class DoubleTalker {
 	public static final int[][] RubberStamp = {

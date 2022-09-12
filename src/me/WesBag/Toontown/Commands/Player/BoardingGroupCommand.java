@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.Commands.PlayerCommands;
+package me.WesBag.Toontown.Commands.Player;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -6,8 +6,8 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import me.WesBag.TTCore.CogHQs.BoardingGroups.BoardingGroup;
-import me.WesBag.TTCore.Commands.Prefixes;
+import me.WesBag.Toontown.BattleCore.Cogs.HQs.BoardingGroups.BoardingGroup;
+import me.WesBag.Toontown.Commands.Prefixes;
 import net.md_5.bungee.api.ChatColor;
 
 public class BoardingGroupCommand implements CommandExecutor {

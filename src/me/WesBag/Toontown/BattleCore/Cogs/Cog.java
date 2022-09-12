@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs;
+package me.WesBag.Toontown.BattleCore.Cogs;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.UUID;
@@ -10,10 +10,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.BattleMenu;
-import me.WesBag.TTCore.Files.BattleData;
-import me.WesBag.TTCore.Files.CogType;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.BattleCore;
+import me.WesBag.Toontown.Files.BattleData;
+import me.WesBag.Toontown.Files.CogType;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
 import net.citizensnpcs.trait.SkinTrait;
@@ -61,7 +61,7 @@ public class Cog {
 		cogType = CogType.valueOf(cogTypeStr.replace(" ", "_").toUpperCase());
 		
 		
-		BattleData battleData = BattleMenu.getBattleDataNPC(npc);
+		BattleData battleData = BattleCore.getBattleDataNPC(npc);
 		if (battleData != null)
 			battleData.addCog(npc.getUniqueId(), this);
 		else

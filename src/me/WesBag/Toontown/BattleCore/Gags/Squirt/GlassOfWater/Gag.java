@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Gags.Squirt.GlassOfWater;
+package me.WesBag.Toontown.BattleCore.Gags.Squirt.GlassOfWater;
 
 import org.bukkit.Sound;
 

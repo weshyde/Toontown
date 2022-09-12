@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Sellbot.TwoFace;
+package me.WesBag.Toontown.BattleCore.Cogs.Sellbot.TwoFace;
 
 public class TwoFace {
 

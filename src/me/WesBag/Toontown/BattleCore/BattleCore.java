@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu;
+package me.WesBag.Toontown.BattleCore;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,22 +29,22 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
 
-import me.WesBag.TTCore.Main;
-import me.WesBag.TTCore.BattleMenu.Cogs.Cog;
-import me.WesBag.TTCore.BattleMenu.Gags.Throw.Throw;
-import me.WesBag.TTCore.BattleMenu.Gags.Toonup.Toonup;
-import me.WesBag.TTCore.BattleMenu.Gags.Trap.Trap;
-import me.WesBag.TTCore.BattleMenu.Toons.Toon;
-import me.WesBag.TTCore.BattleMenu.Toons.ToonsController;
-import me.WesBag.TTCore.BattleMenu.Gags.Gag;
-import me.WesBag.TTCore.BattleMenu.Gags.Drop.Drop;
-import me.WesBag.TTCore.BattleMenu.Gags.Lure.Lure;
-import me.WesBag.TTCore.BattleMenu.Gags.Sound.Sound;
-import me.WesBag.TTCore.BattleMenu.Gags.Squirt.Squirt;
-import me.WesBag.TTCore.Files.BattleData;
-import me.WesBag.TTCore.Files.CogType;
-import me.WesBag.TTCore.ShtickerBook.ShtickerBook;
-import me.WesBag.TTCore.Tasks.CustomEvents.BattleFinishEvent;
+import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.BattleCore.Cogs.Cog;
+import me.WesBag.Toontown.BattleCore.Gags.Throw.Throw;
+import me.WesBag.Toontown.BattleCore.Gags.Toonup.Toonup;
+import me.WesBag.Toontown.BattleCore.Gags.Trap.Trap;
+import me.WesBag.Toontown.BattleCore.Toons.Toon;
+import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import me.WesBag.Toontown.BattleCore.Gags.Gag;
+import me.WesBag.Toontown.BattleCore.Gags.Drop.Drop;
+import me.WesBag.Toontown.BattleCore.Gags.Lure.Lure;
+import me.WesBag.Toontown.BattleCore.Gags.Sound.Sound;
+import me.WesBag.Toontown.BattleCore.Gags.Squirt.Squirt;
+import me.WesBag.Toontown.Files.BattleData;
+import me.WesBag.Toontown.Files.CogType;
+import me.WesBag.Toontown.BattleCore.Toons.ShtickerBook.ShtickerBook;
+import me.WesBag.Toontown.Tasks.CustomEvents.BattleFinishEvent;
 import net.citizensnpcs.api.event.NPCCollisionEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
@@ -52,7 +52,7 @@ import net.citizensnpcs.npc.ai.NPCHolder;
 import net.citizensnpcs.trait.waypoint.LinearWaypointProvider;
 import net.citizensnpcs.trait.waypoint.Waypoints;
 
-public class BattleMenu implements Listener {
+public class BattleCore implements Listener {
 	public static Main main;
 	public static Logger PluginLogger;
 	public static List<BattleData> allBattles = new ArrayList<BattleData>();
@@ -72,7 +72,7 @@ public class BattleMenu implements Listener {
 	public volatile Inventory targetInv;
 	public volatile Inventory gagLobbyInv;
 
-	public BattleMenu(Main mn) {
+	public BattleCore(Main mn) {
 		main = mn;
 		countdowns = new HashMap<>();
 		allBattles = new ArrayList<>();

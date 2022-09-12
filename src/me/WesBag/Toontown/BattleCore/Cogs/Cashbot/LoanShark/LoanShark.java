@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Cashbot.LoanShark;
+package me.WesBag.Toontown.BattleCore.Cogs.Cashbot.LoanShark;
 
 public class LoanShark {
 

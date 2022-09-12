@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.AmbulanceChaser;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.AmbulanceChaser;
 
 public class AmbulanceChaser {
 	public static final int[][] Shake = {

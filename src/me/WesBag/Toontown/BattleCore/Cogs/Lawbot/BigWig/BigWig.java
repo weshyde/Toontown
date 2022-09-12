@@ -1,4 +1,4 @@
-package me.WesBag.TTCore.BattleMenu.Cogs.Lawbot.BigWig;
+package me.WesBag.Toontown.BattleCore.Cogs.Lawbot.BigWig;
 
 public class BigWig {
 	public static final int[][] PowerTrip = {
