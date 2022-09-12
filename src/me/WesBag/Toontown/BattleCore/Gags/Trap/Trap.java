@@ -35,7 +35,7 @@ public class Trap {
 	public static int getMinDmg(String gag) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Gags.Trap." + gag + ".Gag");
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Gags.Trap." + gag + ".Gag");
 			return gagc.getField("minDamage").getInt(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();
@@ -46,7 +46,7 @@ public class Trap {
 	public static int getMaxDmg(String gag) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Gags.Trap." + gag + ".Gag");
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Gags.Trap." + gag + ".Gag");
 			return gagc.getField("maxDamage").getInt(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();
@@ -57,7 +57,7 @@ public class Trap {
 	public static Sound getSound(String gag) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Gags.Trap." + gag + ".Gag");
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Gags.Trap." + gag + ".Gag");
 			return (Sound) gagc.getField("snd").get(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();

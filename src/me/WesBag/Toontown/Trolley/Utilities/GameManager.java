@@ -59,10 +59,10 @@ public class GameManager {
 			this.gameName = allGameNames[result].replace("-", " ");
 			this.gameClass = allGames.get(result);
 			this.rewardManager = new RewardManager(this, playersIn);
-			//Class<?> testClass = Class.forName("me.WesBag.TTCore.Trolley.Minigames." + allGameNames[result].replace("-", "") + "." + allGameNames[result].replace(" ", ""));
+			//Class<?> testClass = Class.forName("me.WesBag.Toontown.Trolley.Minigames." + allGameNames[result].replace("-", "") + "." + allGameNames[result].replace(" ", ""));
 			Method loadArenaMethod = null;
 			try {
-				Class<?> testClass = Class.forName("me.WesBag.TTCore.Trolley.Minigames." + allGameNames[result].replace("-", "") + "." + allGameNames[result].replace("-", ""));
+				Class<?> testClass = Class.forName("me.WesBag.Toontown.Trolley.Minigames." + allGameNames[result].replace("-", "") + "." + allGameNames[result].replace("-", ""));
 				loadArenaMethod = testClass.getMethod("loadArena", GameManager.class, RewardManager.class, List.class);
 				//conditionType = gameClass.getField("earnCondition").getInt(gameClass.getDeclaredConstructor().newInstance());
 				//testClass object = new testClass();

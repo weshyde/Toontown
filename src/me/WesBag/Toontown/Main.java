@@ -200,8 +200,8 @@ public class Main extends JavaPlugin implements Listener {
 		
 		
 		
-		//battle = new me.WesBag.TTCore.BattleCore.BattleCore(this, data);
-		//cogs = new me.WesBag.TTCore.BattleCore.Cogs.CogsController(this);
+		//battle = new me.WesBag.Toontown.BattleCore.BattleCore(this, data);
+		//cogs = new me.WesBag.Toontown.BattleCore.Cogs.CogsController(this);
 		
 		if (!dataFile.getData().contains("locations.")) {
 			String[] tempLocationNames = {"ttc", "dd", "dg", "mml", "b", "ddl", "sb", "cb", "lb", "bb"};

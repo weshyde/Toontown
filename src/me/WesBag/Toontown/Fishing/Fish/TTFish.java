@@ -30,7 +30,7 @@ public class TTFish {
 		try {
 			String editedName = name;
 			String editedSpecies = species;
-			Class<?> fishClass = Class.forName("me.WesBag.TTCore.Fishing.Fish." + editedSpecies.replace(" ", "") + "." + editedName.replace(" ", ""));
+			Class<?> fishClass = Class.forName("me.WesBag.Toontown.Fishing.Fish." + editedSpecies.replace(" ", "") + "." + editedName.replace(" ", ""));
 			//this.rarity = (int) fishClass.getField("rarity").getInt(fishClass);
 			//this.rodNeeded = (int) fishClass.getField("rod").getInt(fishClass);
 			//this.minBeans = (int) fishClass.getField("minBeans").getInt(fishClass);

@@ -13,13 +13,13 @@ import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
 import me.WesBag.Toontown.Commands.Prefixes;
 import net.md_5.bungee.api.ChatColor;
 
-public class CheckTTCore implements CommandExecutor {
+public class CheckToontownCore implements CommandExecutor {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 		if (sender instanceof Player) {
 			Player player = (Player) sender;
-			if (label.equalsIgnoreCase("checkttcore")) {
+			if (label.equalsIgnoreCase("checktoontowncore")) {
 				if (!player.hasPermission("ttc.owner")) {
 					player.sendMessage(Prefixes.NoPerm);
 				}

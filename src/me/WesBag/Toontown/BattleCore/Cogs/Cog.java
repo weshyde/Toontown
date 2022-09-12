@@ -98,7 +98,7 @@ public class Cog {
 		storedAttacks = newGetCogAttacks();
 		/* Commented out to implement method called above to not have to put getCogAttacks method within each cog class
 		try {
-			Class<?> cogInfo = Class.forName("me.WesBag.TTCore.BattleMenu.Cogs." + cogSuit + "." + cogName.replace(" ", "") + "." + cogName.replace(" ", ""));
+			Class<?> cogInfo = Class.forName("me.WesBag.Toontown.BattleCore.Cogs." + cogSuit + "." + cogName.replace(" ", "") + "." + cogName.replace(" ", ""));
 			Method getAttacksMethod = null;
 			numOfCogAttacks = cogInfo.getField("numOfAttacks").getInt(cogInfo.getDeclaredConstructor().newInstance());
 			getAttacksMethod = cogInfo.getMethod("getCogAttacks", int.class);
@@ -118,7 +118,7 @@ public class Cog {
 	public int[][] newGetCogAttacks() {
 		try {
 			String editedName = cogName;
-			Class<?> cogClass = Class.forName("me.WesBag.TTCore.BattleMenu.Cogs." + cogSuit + "." + editedName.replace(" ", "") + "." + editedName.replace(" ", ""));
+			Class<?> cogClass = Class.forName("me.WesBag.Toontown.BattleCore.Cogs." + cogSuit + "." + editedName.replace(" ", "") + "." + editedName.replace(" ", ""));
 			numOfCogAttacks = cogClass.getField("numOfAttacks").getInt(cogClass.getDeclaredConstructor().newInstance());
 			storedAttackNames = (String[]) cogClass.getField("attackNames").get(cogClass.getDeclaredConstructor().newInstance());
 			storedAttacksHitAll = (boolean[]) cogClass.getField("hitAll").get(cogClass.getDeclaredConstructor().newInstance());
@@ -140,7 +140,7 @@ public class Cog {
 	public void loadCogSkin() {
 		try {
 			String editedName = cogName;
-			Class<?> cogClass = Class.forName("me.WesBag.TTCore.BattleMenu.Cogs." + cogSuit + "." + editedName.replace(" ", "") + "." + editedName.replace(" ", ""));
+			Class<?> cogClass = Class.forName("me.WesBag.Toontown.BattleCore.Cogs." + cogSuit + "." + editedName.replace(" ", "") + "." + editedName.replace(" ", ""));
 			String tex = (String) cogClass.getField("skinTexture").get(cogClass.getDeclaredConstructor().newInstance());
 			String sig = (String) cogClass.getField("skinSignature").get(cogClass.getDeclaredConstructor().newInstance());
 			npc.getOrAddTrait((SkinTrait.class)).setSkinPersistent(cogName, sig, tex);

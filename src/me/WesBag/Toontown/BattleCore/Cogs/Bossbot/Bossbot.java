@@ -20,7 +20,7 @@ public class Bossbot {
 	public static int getNumOfAttacks(String cogName) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Cogs.Bossbot." + cogName + "." + cogName);
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Cogs.Bossbot." + cogName + "." + cogName);
 			return gagc.getField("attacks").getInt(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();
@@ -31,7 +31,7 @@ public class Bossbot {
 	public static int getAttacks(String cogName) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Cogs.Bossbot." + cogName + "." + cogName);
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Cogs.Bossbot." + cogName + "." + cogName);
 			return gagc.getField("minDamage").getInt(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();

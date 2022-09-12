@@ -29,7 +29,7 @@ public class Throw {
 	public static int getMinDmg(String gag) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Gags.Throw." + gag + ".Gag");
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Gags.Throw." + gag + ".Gag");
 			return gagc.getField("minDamage").getInt(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();
@@ -40,7 +40,7 @@ public class Throw {
 	public static int getMaxDmg(String gag) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Gags.Throw." + gag + ".Gag");
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Gags.Throw." + gag + ".Gag");
 			return gagc.getField("maxDamage").getInt(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();
@@ -51,7 +51,7 @@ public class Throw {
 	public static int getAcc(String gag) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Gags.Throw." + gag + ".Gag");
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Gags.Throw." + gag + ".Gag");
 			return gagc.getField("acc").getInt(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();
@@ -62,7 +62,7 @@ public class Throw {
 	public static Sound getSound(String gag) {
 		Class<?> gagc;
 		try {
-			gagc = Class.forName("me.WesBag.TTCore.BattleMenu.Gags.Throw." + gag + ".Gag");
+			gagc = Class.forName("me.WesBag.Toontown.BattleCore.Gags.Throw." + gag + ".Gag");
 			return (Sound) gagc.getField("snd").get(gagc.getDeclaredConstructor().newInstance());
 		} catch (ClassNotFoundException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
 			e.printStackTrace();
