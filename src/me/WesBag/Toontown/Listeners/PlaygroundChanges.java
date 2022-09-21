@@ -22,6 +22,24 @@ public class PlaygroundChanges implements Listener {
 		e.getPlayer().sendMessage("Welcome to " + e.getRegion().getId().toString().toUpperCase() + "!");
 		if (e.getRegionName().contains("all")) return;
 		Toon toon = ToonsController.getToon(e.getPlayer().getUniqueId());
+		
+		String regionName = e.getRegionName();
+		int ID = 0;
+		regionName.toLowerCase();
+		if (regionName.contains("ttc")) {
+			ID = 10;
+			if (regionName.contains("loopy")) {
+				ID += 1;
+			}
+			else if (regionName.contains("punchline")) {
+				ID += 2;
+			}
+			else if (regionName.contains("silly")) {
+				ID += 3;
+			}
+		}
+		
+		toon.setRegionLocationID(ID);
 		//for (int i = 0; i < pgLocationNames.length; i++) {
 		//	if (e.getRegion().getId().toString() == pgLocationNames[i]) {
 		//		Location tempL = (Location) data.getConfig().get("locations." + pgLocationNames[i]);

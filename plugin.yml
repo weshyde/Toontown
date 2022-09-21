@@ -1,0 +1,36 @@
+main: me.WesBag.Toontown.Main
+name: Toontown
+version: 1.7A
+author: WesBag
+api-version: 1.17
+depend: [Citizens, WorldGuard, WorldEdit, WorldGuardEvents, Quests]
+
+commands:
+  testcore:
+  xmebattle:
+  setgag:
+  stopallbattles:
+  resetgags:
+  setgagexp:
+  heallaff:
+  maxtoon:
+  maxtrack:
+  setgagmax:
+  teleporttest:
+  spawnbuilding:
+  givejellybeans:
+  setjellybeans:
+  streets:
+  changeskin:
+  testpathing:
+  testbuildinganimation:
+  testspawncogs:
+  startinvasion:
+  throwitem:
+  spawnnpcs:
+  setlaff:
+  cogbuildings:
+  fishing:
+  book:
+  setgagamount:
+  createtestnpc:

@@ -123,6 +123,10 @@ public class Toon {
 	
 	private List<Inventory> toonShtickerBook = new ArrayList<>();
 	
+	private int currentRegionLocationID; //For tracking the region player is in for things such as anchoring a street battle
+	//XY
+	//X: Playground, Y: Main PG, street, etc
+	
 	private Inventory toonGagInv;
 	private Inventory toonGagInv2;
 	private Inventory toonGagExpInv;
@@ -880,6 +884,10 @@ public class Toon {
 		this.jellybeans = jbs;
 	}
 	
+	public void setRegionLocationID(int newID) {
+		currentRegionLocationID = newID;
+	}
+	
 	public void addBankJellybeans(int jbs) {
 		if (this.jellybeans + jbs > 10000) {
 			this.jellybeans = 10000;
@@ -988,7 +996,9 @@ public class Toon {
 		return currentGagAmount;
 	}
 	
-	
+	public int getRegionLocationID() {
+		return currentRegionLocationID;
+	}
 
 	
 	public int[][] getGagAmounts() {

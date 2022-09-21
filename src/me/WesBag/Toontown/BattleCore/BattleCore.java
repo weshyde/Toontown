@@ -20,6 +20,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -43,6 +44,7 @@ import me.WesBag.Toontown.BattleCore.Gags.Sound.Sound;
 import me.WesBag.Toontown.BattleCore.Gags.Squirt.Squirt;
 import me.WesBag.Toontown.Files.BattleData;
 import me.WesBag.Toontown.Files.CogType;
+import me.WesBag.Toontown.Streets.StreetBattlePositioning;
 import me.WesBag.Toontown.BattleCore.Toons.ShtickerBook.ShtickerBook;
 import me.WesBag.Toontown.Tasks.CustomEvents.BattleFinishEvent;
 import net.citizensnpcs.api.event.NPCCollisionEvent;
@@ -179,18 +181,26 @@ public class BattleCore implements Listener {
 	public void startStreetBattle(UUID playerUUID, UUID npcUUID) {
 		Player p = Bukkit.getPlayer(playerUUID);
 		Location battleKey = p.getLocation();
-
+		
+		//Implementing new battle positioning system here 9-15-22
+		NPC npc = main.registry.getByUniqueId(npcUUID);
+		Location battleLoc = StreetBattlePositioning.anchorStreetBattle(ToonsController.getToon(playerUUID).getRegionLocationID(), npc.getStoredLocation());
+		if (battleLoc == null) {
+			p.sendMessage(ChatColor.BLUE + "[Battle] " + ChatColor.WHITE + "No suitable street battle location found!");
+			return;
+		}
+		
 		for (BattleData bData : allBattles) {
 			if (battleKey.distance(bData.getKey()) < 10) {
 				p.sendMessage(ChatColor.BLUE + "[Battle] " + ChatColor.WHITE + "Too close to an existing battle!");
 				return;
 			}
 		}
-
-		BattleData battleData = new BattleData(main, playerUUID, npcUUID, battleKey);
+		
+		BattleData battleData = new BattleData(main, playerUUID, npcUUID, battleKey, battleLoc);
 		allBattles.add(battleData);
 
-		NPC npc = main.registry.getByUniqueId(npcUUID);
+		//NPC npc = main.registry.getByUniqueId(npcUUID); Moved up for new battle posing sys
 		((LinearWaypointProvider) npc.getOrAddTrait(Waypoints.class).getCurrentProvider()).setPaused(true);
 		//LinearWaypointProvider lwp;
 		String npcName = npc.getFullName();
@@ -202,6 +212,9 @@ public class BattleCore implements Listener {
 		Toon toon = battleData.getBattleToon(playerUUID);
 		// tempToon.loadToonGagAmounts(); FUCK THIS LINE
 		// NPC npc = main.registry.getByUniqueId(npcs.get(0));
+		
+		
+		/* Replacing to implement new street battle posing sys
 		Location npcL = npc.getStoredLocation();
 		Vector v = npcL.getDirection().clone();
 		v.setY(0);
@@ -212,6 +225,35 @@ public class BattleCore implements Listener {
 		l.setDirection(lv);
 		l.add(2.0, 0.0, 0.0);
 		player.teleport(l);
+		*/
+		
+		npc.teleport(battleLoc, TeleportCause.PLUGIN);
+		Location playerLoc = battleLoc.clone();
+		
+		//Player Yaw calculations
+		if (battleLoc.getYaw() > 50) {
+			playerLoc.setYaw(battleLoc.getYaw()-180);// = anchorLocation.getYaw() - 180;
+		}
+		else {
+			playerLoc.setYaw(battleLoc.getYaw()+180);
+		}
+		
+		//Player position calculations
+		if (battleLoc.getYaw() == 180) {
+			playerLoc.add(0, 0, -3);
+		}
+		else if (battleLoc.getYaw() == -90) {
+			playerLoc.add(3, 0, 0);
+		}
+		else if (battleLoc.getYaw() == 0) {
+			playerLoc.add(0, 0, 3);
+		}
+		else if (battleLoc.getYaw() == 90) {
+			playerLoc.add(-3, 0, 0);
+		}
+		player.teleport(playerLoc);
+		
+		
 		// playerAmountDirectionChange += 2.0;
 		// tempToon.loadToonGags(); Commented and changed to below 1/15/22 11:33pm
 		toon.refreshToonGags();
@@ -220,6 +262,7 @@ public class BattleCore implements Listener {
 		openInventoryLater(player, toon.getGagInventory());
 	}
 
+	//OUTDATED?
 	public boolean startStreetBattle(List<UUID> players, List<UUID> npcs) { // Made for switching to new "Toon" object
 																			// with stored inventory
 
@@ -232,6 +275,7 @@ public class BattleCore implements Listener {
 				return false;
 			}
 		}
+		
 
 		BattleData battleData = new BattleData(main, players, npcs, battleKey);
 		allBattles.add(battleData);
@@ -291,6 +335,7 @@ public class BattleCore implements Listener {
 		}
 	}
 
+	//No longer needed? 9-20-22
 	public void joinBattle(List<UUID> iPlayers, List<UUID> iNpcs, BattleData inputBattleData) {
 		int playersInBattle = inputBattleData.getBattlePlayerList().size();
 		inputBattleData.sendAllMessage("Size of list of players to join: " + iPlayers.size());

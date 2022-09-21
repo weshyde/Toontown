@@ -13,6 +13,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerTeleportEvent.TeleportCause;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -25,6 +26,7 @@ import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuildingController;
 import me.WesBag.Toontown.BattleCore.Gags.Gag;
 import me.WesBag.Toontown.BattleCore.Toons.Toon;
 import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import net.citizensnpcs.api.npc.NPC;
 import net.md_5.bungee.api.ChatColor;
 
 import java.util.List;
@@ -35,6 +37,7 @@ public class BattleData {
 	private Main main;
 	private List<UUID> players = new ArrayList<>();
 	private List<UUID> joiningPlayerQueue = new ArrayList<>();
+	private List<UUID> joiningCogQueue = new ArrayList<>();
 	private Map<UUID, Toon> toons = new HashMap<>();
 	private List<UUID> npcs = new ArrayList<UUID>();
 	private Map<UUID, Cog> cogs = new HashMap<UUID, Cog>();
@@ -58,6 +61,12 @@ public class BattleData {
 	private boolean specialMode = false;
 	private boolean playersTurn = true;
 	
+	private Location cogDefaultLoc;
+	private Location playerDefaultLoc;
+	private int streetLocID; //Only used when its a street battle to identity street anchor location
+	//private float playerYaw, playerPitch; //Default yaw and pitch for teleporting players
+	private float cogYaw, cogPitch; //Needed? TBD 9-15-22
+	
 	private CogBuilding cogBuilding = null;
 
 	public BattleData(Main mn, List<UUID> inputPlayers, List<UUID> inputNpcs, Location tempKey) {
@@ -71,10 +80,11 @@ public class BattleData {
 		}
 		initBattleInventories();
 	}
-	//New Constructor for changing startStreetBattle to only accept a uuid, not a list of uuids.
-	public BattleData(Main main, UUID playerUUID, UUID npcUUID, Location key) {
+	//Constructor for changing startStreetBattle to only accept a uuid, not a list of uuids. Added new anchorLoc 9-15-22 for battle positioning
+	public BattleData(Main main, UUID playerUUID, UUID npcUUID, Location key, Location anchorLocation) {
 		this.main = main;
 		this.key = key;
+		this.cogDefaultLoc = anchorLocation;
 		players.add(playerUUID);
 		npcs.add(npcUUID);
 		Toon toon = ToonsController.getToon(playerUUID);
@@ -82,6 +92,7 @@ public class BattleData {
 		initBattleInventories();
 	}
 	
+	//----WARNING: This constructor will eventually need to take anchor location as well----
 	public BattleData(Main mn, List<UUID> players, List<UUID> npcs, Location key, boolean specialMode, CogBuilding cBuilding) {
 		this.specialMode = specialMode;
 		this.cogBuilding = cBuilding;
@@ -268,9 +279,9 @@ public class BattleData {
 	
 	public void addPlayerActiveBattle(UUID uuid) {
 		System.out.println("Added player to active battle!");
-		Location newPlayerLocation = Bukkit.getPlayer(players.get(players.size() - 1)).getLocation();
-		newPlayerLocation.add(2.0, 0.0, 0.0);
-		Bukkit.getPlayer(uuid).teleport(newPlayerLocation);
+		//Location newPlayerLocation = Bukkit.getPlayer(players.get(players.size() - 1)).getLocation();
+		//newPlayerLocation.add(2.0, 0.0, 0.0);
+		//Bukkit.getPlayer(uuid).teleport(newPlayerLocation);
 		players.add(uuid);
 		initPlayerBattleInventorys(uuid);
 		if (joiningPlayerQueue.contains(uuid))
@@ -280,6 +291,7 @@ public class BattleData {
 		Player tempPlayer = Bukkit.getPlayer(uuid);
 		tempPlayer.getInventory().setContents(tempToon.getGag2Inventory().getContents());
 		BattleCore.openInventoryLater(tempPlayer, tempToon.getGagInventory());
+		refreshPlayerLocations(1);
 	}
 	
 	public void addPlayerActiveBattle(List<UUID> uuids) {
@@ -296,21 +308,22 @@ public class BattleData {
 			tempPlayer.getInventory().setContents(tempToon.getGag2Inventory().getContents());
 			BattleCore.openInventoryLater(tempPlayer, tempToon.getGagInventory());
 		}
+		refreshPlayerLocations(uuids.size());
 		joiningPlayerQueue.removeAll(uuids);
 	}
 
 	public void removePlayer(UUID pUUID) {
-		if (players.contains(pUUID)) {
-			players.remove(pUUID);
-		}
+		players.remove(pUUID);
+		refreshPlayerLocations(-1);
 	}
 	
 	public void removePlayers(List<UUID> pUUIDs) {
 		for (UUID pUUID : pUUIDs) {
-			if (players.contains(pUUID)) {
 				players.remove(pUUID);
-			}
 		}
+		int rmvAmt = players.size();
+		rmvAmt *= -1;
+		refreshPlayerLocations(rmvAmt);
 	}
 
 	public void addPlayerQueue(UUID pUUID) {
@@ -386,6 +399,228 @@ public class BattleData {
 	//	else
 	//		bdDeadCogs2.put(deadCog, 1);
 	//}
+	
+	public void refreshPlayerLocations(int amtChange) {
+		float L0_5x = 0.5f, L0_5z = 0.5f;
+		float L1x = 1f, L1z = 1f;
+		float R1x = 1f, R1z = 1f;
+		float L1_5x = 1.5f, L1_5z = 1.5f;
+		float R2x = 2f, R2z = 2f;
+		if (playerDefaultLoc.getYaw() == 180) {
+			L0_5x *= -1; L0_5z = 0f;
+			L1x *= -1; L1z = 0f;
+			R1z = 0f;
+			L1_5x *= -1; L1_5z = 0f;
+			R2z = 0f;
+		}
+		else if (playerDefaultLoc.getYaw() == -90) {
+			L0_5x = 0; L0_5z *= -1;
+			L1x = 0; L1z *= -1;
+			R1x = 0;
+			L1_5x = 0; L1_5z *= -1;
+			R2x = 0;
+		}
+		else if (playerDefaultLoc.getYaw() == 0) {
+			L0_5z = 0;
+			L1z = 0;
+			R1x *= -1; R1z = 0;
+			L1_5z = 0;
+			R2x *= -1; R2z = 0;
+		}
+		else if (playerDefaultLoc.getYaw() == 90) {
+			L0_5x = 0;
+			L1x = 0;
+			R1x = 0; R1z *= -1;
+			L1_5x = 0;
+			R2x = 0; R2z *= -1;
+		}
+		
+		Player p1 = Bukkit.getPlayer(players.get(0));
+		int orgAmt = players.size() - amtChange;
+		if (orgAmt == 1) {
+			if (amtChange == 1) { //Joining
+				p1.teleport(p1.getLocation().add(L1x, 0, L1z));
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(R2x, 0, R2z));
+			}
+			else if (amtChange == 2) { //Joining
+				p1.teleport(p1.getLocation().add(L1x, 0, L1z));
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(R1x, 0, R1z));
+				Player p3 = Bukkit.getPlayer(players.get(2));
+				p3.teleport(p2.getLocation().add(R1x, 0, R1z));
+			}
+			else if (amtChange == 3) { //Joining
+				p1.teleport(p1.getLocation().add(L1_5x, 0, L1_5z));
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(R1x, 0, R1z));
+				Player p3 = Bukkit.getPlayer(players.get(2));
+				p3.teleport(p2.getLocation().add(R1x, 0, R1z));
+				Player p4 = Bukkit.getPlayer(players.get(3));
+				p4.teleport(p3.getLocation().add(R1x, 0, R1z));
+			}
+		}
+		else if (orgAmt == 2) {
+			if (amtChange == 1) { //Joining
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(L1x, 0, L1z));
+				Player p3 = Bukkit.getPlayer(players.get(2));
+				p3.teleport(p2.getLocation().add(R1x, 0, R1z));
+			}
+			else if (amtChange == 2) { //Joining
+				p1.teleport(p1.getLocation().add(L0_5x, 0, L0_5z));
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(L1x, 0, L1z));
+				Player p3 = Bukkit.getPlayer(players.get(2));
+				p3.teleport(p2.getLocation().add(L1x, 0, L1z));
+				Player p4 = Bukkit.getPlayer(players.get(3));
+				p4.teleport(p3.getLocation().add(L1x, 0, L1z));
+			}
+		}
+		else if (orgAmt == 3) {
+			if (amtChange == 1) { //Joining
+				p1.teleport(p1.getLocation().add(L0_5x, 0, L0_5z));
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(R1x, 0, R1z));
+				Player p3 = Bukkit.getPlayer(players.get(2));
+				p3.teleport(p2.getLocation().add(R1x, 0, R1z));
+				Player p4 = Bukkit.getPlayer(players.get(3));
+				p4.teleport(p3.getLocation().add(R1x, 0, R1z));
+			}
+		}
+		//LEAVING
+		else if (amtChange == -1) {
+			if (orgAmt == 4) {
+				p1.teleport(playerDefaultLoc);
+				p1.teleport(p1.getLocation().add(L1x, 0, L1z));
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(R1x, 0, R1z));
+				Player p3 = Bukkit.getPlayer(players.get(2));
+				p3.teleport(p2.getLocation().add(R1x, 0, R1z));
+			}
+			else if (orgAmt == 3) {
+				p1.teleport(playerDefaultLoc);
+				p1.teleport(p1.getLocation().add(L1x, 0, R1z));
+				Player p2 = Bukkit.getPlayer(players.get(1));
+				p2.teleport(p1.getLocation().add(R1x, 0, R1z));
+			}
+			else if (orgAmt == 2) {
+				p1.teleport(playerDefaultLoc);
+			}
+			//No 1 case cause battle would be over
+		}
+	}
+	
+	public void refreshCogLocations(int amtChange) {
+		float L0_5x = 0.5f, L0_5z = 0.5f;
+		float L1x = 1f, L1z = 1f;
+		float R1x = 1f, R1z = 1f;
+		float L1_5x = 1.5f, L1_5z = 1.5f;
+		float R2x = 2f, R2z = 2f;
+		if (cogDefaultLoc.getYaw() == 180) {
+			L0_5x *= -1; L0_5z = 0f;
+			L1x *= -1; L1z = 0f;
+			R1z = 0f;
+			L1_5x *= -1; L1_5z = 0f;
+			R2z = 0f;
+		}
+		else if (cogDefaultLoc.getYaw() == -90) {
+			L0_5x = 0; L0_5z *= -1;
+			L1x = 0; L1z *= -1;
+			R1x = 0;
+			L1_5x = 0; L1_5z *= -1;
+			R2x = 0;
+		}
+		else if (cogDefaultLoc.getYaw() == 0) {
+			L0_5z = 0;
+			L1z = 0;
+			R1x *= -1; R1z = 0;
+			L1_5z = 0;
+			R2x *= -1; R2z = 0;
+		}
+		else if (cogDefaultLoc.getYaw() == 90) {
+			L0_5x = 0;
+			L1x = 0;
+			R1x = 0; R1z *= -1;
+			L1_5x = 0;
+			R2x = 0; R2z *= -1;
+		}
+		
+		NPC npc1 = main.registry.getByUniqueId(npcs.get(0));
+		int orgAmt = npcs.size() - amtChange;
+		if (orgAmt == 1) {
+			if (amtChange == 1) { //Joining
+				npc1.teleport(npc1.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(R2x, 0, R2z), TeleportCause.PLUGIN);
+			}
+			else if (amtChange == 2) { //Joining
+				npc1.teleport(npc1.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+				NPC npc3 = main.registry.getByUniqueId(npcs.get(2));
+				npc3.teleport(npc2.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+			}
+			else if (amtChange == 3) { //Joining
+				npc1.teleport(npc1.getStoredLocation().add(L1_5x, 0, L1_5z), TeleportCause.PLUGIN);
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+				NPC npc3 = main.registry.getByUniqueId(npcs.get(2));
+				npc3.teleport(npc2.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+				NPC npc4 = main.registry.getByUniqueId(npcs.get(3));
+				npc4.teleport(npc3.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+			}
+		}
+		else if (orgAmt == 2) {
+			if (amtChange == 1) { //Joining
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+				NPC npc3 = main.registry.getByUniqueId(npcs.get(2));
+				npc3.teleport(npc2.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+			}
+			else if (amtChange == 2) { //Joining
+				npc1.teleport(npc1.getStoredLocation().add(L0_5x, 0, L0_5z), TeleportCause.PLUGIN);
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+				NPC npc3 = main.registry.getByUniqueId(npcs.get(2));
+				npc3.teleport(npc2.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+				NPC npc4 = main.registry.getByUniqueId(npcs.get(3));
+				npc4.teleport(npc3.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+			}
+		}
+		else if (orgAmt == 3) {
+			if (amtChange == 1) { //Joining
+				npc1.teleport(npc1.getStoredLocation().add(L0_5x, 0, L0_5z), TeleportCause.PLUGIN);
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+				NPC npc3 = main.registry.getByUniqueId(npcs.get(2));
+				npc3.teleport(npc2.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+				NPC npc4 = main.registry.getByUniqueId(npcs.get(3));
+				npc4.teleport(npc3.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+			}
+		}
+		//LEAVING
+		else if (amtChange == -1) {
+			if (orgAmt == 4) {
+				npc1.teleport(cogDefaultLoc, TeleportCause.PLUGIN);
+				npc1.teleport(npc1.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+				NPC npc3 = main.registry.getByUniqueId(npcs.get(2));
+				npc3.teleport(npc2.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+			}
+			else if (orgAmt == 3) {
+				npc1.teleport(cogDefaultLoc, TeleportCause.PLUGIN);
+				npc1.teleport(npc1.getStoredLocation().add(L1x, 0, L1z), TeleportCause.PLUGIN);
+				NPC npc2 = main.registry.getByUniqueId(npcs.get(1));
+				npc2.teleport(npc1.getStoredLocation().add(R1x, 0, R1z), TeleportCause.PLUGIN);
+			}
+			else if (orgAmt == 2) {
+				npc1.teleport(cogDefaultLoc, TeleportCause.PLUGIN);
+			}
+			//No 1 case cause battle would be over
+		}
+	}
 	
 	public void addDeadCog(Cog deadCog) {
 		deadCogs.add(deadCog);
@@ -628,6 +863,18 @@ public class BattleData {
 		else {
 			return false;
 		}
+	}
+	
+	public float getDefaultPlayerYaw() {
+		return playerDefaultLoc.getYaw();
+	}
+	
+	public void setDefaultPlayerLocation(Location l) {
+		this.playerDefaultLoc = l;
+	}
+	
+	public Location getDefaultPlayerLocation(Location l) {
+		return playerDefaultLoc.clone();
 	}
 	/*
 	public void lure(UUID iLurer, List<UUID> cogs, int rounds) {
