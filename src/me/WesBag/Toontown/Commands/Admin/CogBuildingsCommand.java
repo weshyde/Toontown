@@ -16,7 +16,7 @@ import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuilding;
 import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuildingController;
 import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
 import me.WesBag.Toontown.Commands.Prefixes;
-import me.WesBag.Toontown.Files.DataFile;
+import me.WesBag.Toontown.Files.VolatileDataFile;
 import me.WesBag.Toontown.SchematicUtilities.SchematicPaster;
 import net.citizensnpcs.api.CitizensAPI;
 import net.citizensnpcs.api.npc.NPC;
@@ -56,10 +56,10 @@ public class CogBuildingsCommand implements CommandExecutor {
 					int choosenBuilding = IsIntUtil.getInt(args[1]);
 					if (choosenBuilding > 0 && choosenBuilding <= CogBuildingController.readyCogBuildings.size()) {
 						Location cbL = (Location) CogBuildingController.readyCogBuildings.keySet().toArray()[--choosenBuilding];
-						String serialL = DataFile.serializeLocation(cbL);
-						if (Main.dataFile.getData().contains("buildings." + serialL)) {
-							Main.dataFile.getData().set("buildings." + serialL, null); //Clears building from saved file if it exists
-							Main.dataFile.saveDataFile();
+						String serialL = VolatileDataFile.serializeLocation(cbL);
+						if (Main.vDataFile.getData().contains("buildings." + serialL)) {
+							Main.vDataFile.getData().set("buildings." + serialL, null); //Clears building from saved file if it exists
+							Main.vDataFile.saveDataFile();
 						}
 						NPC buildingNPC = Main.getInstance().registry.getByUniqueId(CogBuildingController.readyCogBuildings.get(cbL));
 						String oldName = buildingNPC.getOrAddTrait(CogBuildingTrait.class).getOldName();

@@ -14,20 +14,20 @@ import org.bukkit.configuration.file.YamlConfiguration;
 
 import me.WesBag.Toontown.Main;
 
-public class DataFile {
+public class VolatileDataFile {
 	
 	private Main main;
 	public FileConfiguration dataConfig = null;
 	public File dataFile;
 	
-	public DataFile(Main main) {
+	public VolatileDataFile(Main main) {
 		this.main = main;
 		createDataFile();
 	}
 	
 	public void createDataFile() {
 		if (this.dataFile == null) { //Or this.main.getDataFolder() + "/data.yml"
-			this.dataFile = new File(this.main.getDataFolder(), "data.yml");
+			this.dataFile = new File(this.main.getDataFolder(), "vData.yml");
 		}
 		
 		if (!this.dataFile.exists()) {
@@ -35,7 +35,7 @@ public class DataFile {
 			try {
 				config.save(dataFile);
 			} catch (IOException e) {
-				this.main.getLogger().log(Level.SEVERE, "Could not create data.yml!");
+				this.main.getLogger().log(Level.SEVERE, "Could not create vData.yml!");
 			}
 		}
 	}
@@ -48,7 +48,7 @@ public class DataFile {
 			this.getData().save(this.dataFile);
 			//this.main.saveResource("data.yml", false); <-- MAYBE?
 		} catch (IOException e) {
-			main.getLogger().log(Level.SEVERE, "Could not save config file data.yml");
+			main.getLogger().log(Level.SEVERE, "Could not save config file vData.yml");
 		}
 	}
 	
@@ -61,11 +61,11 @@ public class DataFile {
 	
 	public void reloadDataFile() {
 		if (this.dataFile == null) {
-			this.dataFile = new File(this.main.getDataFolder() + "/data.yml");
+			this.dataFile = new File(this.main.getDataFolder() + "/vData.yml");
 		}
 		this.dataConfig = YamlConfiguration.loadConfiguration(this.dataFile);
 		
-		InputStream defaultStream = this.main.getResource("data.yml");
+		InputStream defaultStream = this.main.getResource("vData.yml");
 		if (defaultStream != null) {
 			YamlConfiguration defaultConfig = YamlConfiguration.loadConfiguration(new InputStreamReader(defaultStream));
 			this.dataConfig.setDefaults(defaultConfig);

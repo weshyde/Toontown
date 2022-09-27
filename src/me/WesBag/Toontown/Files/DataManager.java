@@ -18,7 +18,7 @@ public class DataManager {
 	private FileConfiguration dataConfig = null;
 	private File configFile = null;
 	
-	
+	//OUTDATED CLASS? UNEEDED TBD 9-25-22
 	public DataManager(Main plugin) {
 		this.plugin = plugin;
 		//saves/inits the config

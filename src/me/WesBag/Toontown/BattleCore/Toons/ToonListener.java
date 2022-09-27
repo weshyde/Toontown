@@ -23,6 +23,7 @@ public class ToonListener implements Listener {
 		Toon newToon = new Toon(e.getPlayer());
 		//newToon.firstLoad();
 		ToonsController.allToons.put(e.getPlayer().getUniqueId(), newToon);
+		System.out.println("TOON CREATED!");
 		log.log(Level.INFO, "New toon was made for " + e.getPlayer().getName());
 	}
 	

@@ -1059,8 +1059,7 @@ public class BattleCore implements Listener {
 
 	@EventHandler
 	public void onNPCCollision(NPCCollisionEvent e) {
-		if (!(e.getCollidedWith() instanceof Player))
-			return;
+		if (!(e.getCollidedWith() instanceof Player)) return;
 
 		NPC npc = e.getNPC();
 		BattleData battleData = null;
@@ -1068,22 +1067,21 @@ public class BattleCore implements Listener {
 		if (e.getCollidedWith().hasMetadata("NPC")) { // Collided with NPC
 			NPCHolder npcH = (NPCHolder) e.getCollidedWith();
 			NPC collidedNPC = npcH.getNPC();
-			if (getBattleDataNPC(collidedNPC) == null)
-				return;
+			if (getBattleDataNPC(collidedNPC) == null) return;
 
 			battleData = getBattleDataNPC(collidedNPC);
 		}
 
 		else { // Collided with player
 			Player collidedPlayer = (Player) e.getCollidedWith();
-			if (getBattleDataPlayer(collidedPlayer) == null)
-				return;
+			if (getBattleDataPlayer(collidedPlayer) == null) return;
 
 			battleData = getBattleDataPlayer(collidedPlayer);
 		}
 
 		if (battleData != null) { // Battle Exists
-			npc.getNavigator().getPathStrategy().stop();
+			//npc.getNavigator().getPathStrategy().stop() Replacing with working line below
+			((LinearWaypointProvider) npc.getOrAddTrait(Waypoints.class).getCurrentProvider()).setPaused(true);
 
 			int totalCogs = battleData.getDeadCogAmount() + battleData.getCurrentCogAmount();
 			int totalToons = battleData.getCurrentPlayerAmount();

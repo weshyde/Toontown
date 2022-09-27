@@ -650,6 +650,9 @@ public class BattleData {
 
 	public void addCog(UUID cogUUID, Cog cog) {
 		cogs.put(cogUUID, cog);
+		if (cogs.size() > 1) { //If not the first cog, refresh cog locations. (Because first cog is already placed correctly)
+			refreshCogLocations(1);
+		}
 	}
 
 	public UUID getCogUUID(int target) {

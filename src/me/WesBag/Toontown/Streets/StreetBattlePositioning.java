@@ -9,6 +9,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 
+import me.WesBag.Toontown.Main;
+
 public class StreetBattlePositioning {
 	
 	// Integer XYZZ
@@ -18,12 +20,16 @@ public class StreetBattlePositioning {
 	//X -> TTC = 1, DD = 2, etc
 	public static Map<Integer, Boolean> availableStreetLocs = new HashMap<>();
 	public static Map<Integer, List<Double>> streetLocs = new HashMap<>();
-	
+	//StreetLocs List of double -> 0: X, 1: Y, 2: Z, 3: Yaw, 4: Pitch
 	public static void loadAllStreetBattleLocations() {
 		
 		//---- LOOPY LANE ----
 		List<Double> p1 = new ArrayList<Double>();
-		//p1.add(null)
+		p1.add(1370.5);
+		p1.add(56.0);
+		p1.add(-94.5);
+		p1.add(-90.0);
+		p1.add(0.0);
 		
 		
 		//---- PUNCHLINE PLACE ----
@@ -31,6 +37,51 @@ public class StreetBattlePositioning {
 		
 		
 		//---- SILLY STREET ----
+	}
+	
+	public static void saveAllStreetBattleLocationsFromFile() {
+		for (int i = 0; i < 10; i++) {
+			Main.fDataFile.getData().set("sLocations.loopyLane." + i, availableStreetLocs);
+		}
+	}
+	
+	public static void loadAllStreetBattleLocationsFromFile() {
+		Main.fDataFile.getData();
+	}
+	
+	public static String doublesToString(List<Double> doubles) {
+		String s = doubles.get(0).toString() + "_" + doubles.get(1).toString() + "_" + doubles.get(2).toString() + "_" + doubles.get(3).toString() + "_" + doubles.get(4).toString();
+		return s;
+	}
+	
+	public static String locationToString(Location l) {
+		double x = (double)Math.round(l.getX() * 10) / 10;
+		double y = (double)Math.round(l.getY() * 10) / 10;
+		double z = (double)Math.round(l.getZ() * 10) / 10;
+		double yaw = (double)Math.round(l.getYaw() * 10) / 10;
+		double pitch = (double)Math.round(l.getPitch() * 10) / 10;
+		String s = x + "_" + y + "_" + z + "_" + yaw + "_" + pitch;
+		
+		return s;
+	}
+	
+	public static List<Double> locationToDoubles(Location l) {
+		
+		List<Double> doubles = new ArrayList<>();
+		
+		double x = (double)Math.round(l.getX() * 10) / 10;
+		double y = (double)Math.round(l.getY() * 10) / 10;
+		double z = (double)Math.round(l.getZ() * 10) / 10;
+		double yaw = (double)Math.round(l.getYaw() * 10) / 10;
+		double pitch = (double)Math.round(l.getPitch() * 10) / 10;
+		
+		doubles.add(x);
+		doubles.add(y);
+		doubles.add(z);
+		doubles.add(yaw);
+		doubles.add(pitch);
+		
+		return doubles;
 	}
 	
 	public static Location intsToLoc(int streetLocID) {

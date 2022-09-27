@@ -23,6 +23,8 @@ public class PlaygroundChanges implements Listener {
 		if (e.getRegionName().contains("all")) return;
 		Toon toon = ToonsController.getToon(e.getPlayer().getUniqueId());
 		
+		if (toon == null) return; //This is a TEMP FIX for when this event runs before toon creation on join 9-25-22 
+			
 		String regionName = e.getRegionName();
 		int ID = 0;
 		regionName.toLowerCase();

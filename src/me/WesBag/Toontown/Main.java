@@ -25,6 +25,7 @@ import me.WesBag.Toontown.Commands.Admin.HealLaff;
 import me.WesBag.Toontown.Commands.Admin.MaxToon;
 import me.WesBag.Toontown.Commands.Admin.MaxTrack;
 import me.WesBag.Toontown.Commands.Admin.ResetGags;
+import me.WesBag.Toontown.Commands.Admin.SaveStreetBattleLocation;
 import me.WesBag.Toontown.Commands.Admin.SetGag;
 import me.WesBag.Toontown.Commands.Admin.SetGagAmount;
 import me.WesBag.Toontown.Commands.Admin.SetGagExp;
@@ -39,7 +40,8 @@ import me.WesBag.Toontown.Commands.Testing.TestCommand;
 import me.WesBag.Toontown.Commands.Testing.ThrowItemAnimation;
 import me.WesBag.Toontown.Commands.Player.BookCommand;
 import me.WesBag.Toontown.Files.BattleData;
-import me.WesBag.Toontown.Files.DataFile;
+import me.WesBag.Toontown.Files.FinalDataFile;
+import me.WesBag.Toontown.Files.VolatileDataFile;
 import me.WesBag.Toontown.Files.PlayerData;
 import me.WesBag.Toontown.Files.PlayerDataController;
 import me.WesBag.Toontown.Fishing.FishController;
@@ -73,7 +75,8 @@ public class Main extends JavaPlugin implements Listener {
 	public BattleCore battleCore;
 	public Logger log;
 	//public BattleData battleData;
-	public static DataFile dataFile;
+	public static VolatileDataFile vDataFile;
+	public static FinalDataFile fDataFile;
 	public NPCRegistry registry;
 	//public CogsController cogs;
 	//public BattleCore battle;
@@ -89,7 +92,8 @@ public class Main extends JavaPlugin implements Listener {
 	public void onEnable() {
 		//this.data = new DataManager(this); //Changed for testing playerdata
 		//this.data2 = new PlayerData(this);
-		Main.dataFile = new DataFile(this);
+		Main.vDataFile = new VolatileDataFile(this);
+		Main.fDataFile = new FinalDataFile(this);
 		instance = this;
 		registry = CitizensAPI.getNPCRegistry();
 		log = getLogger();
@@ -134,6 +138,7 @@ public class Main extends JavaPlugin implements Listener {
 		getCommand("spawnbuilding").setExecutor(new TestCommand());
 		getCommand("testpathing").setExecutor(new TestCommand());
 		getCommand("testbuildinganimation").setExecutor(new TestCommand());
+		getCommand("savestreetbattlelocation").setExecutor(new SaveStreetBattleLocation());
 		getCommand("testspawncogs").setExecutor(new TestCommand());
 		getCommand("startinvasion").setExecutor(new StartInvasion());
 		getCommand("givejellybeans").setExecutor(new GiveJellybeans());
@@ -177,12 +182,12 @@ public class Main extends JavaPlugin implements Listener {
 		//Cog Building Locations loading:
 		//Main.dataFile = new DataFile(this);
 		
-		if (Main.dataFile != null) {
-			if (Main.dataFile.getData().contains("buildings")) {
-				Main.dataFile.getData().getConfigurationSection("buildings").getKeys(false).forEach(key ->{
-					UUID uuid = UUID.fromString(Main.dataFile.getData().get("buildings." + key).toString());
+		if (Main.vDataFile != null) {
+			if (Main.vDataFile.getData().contains("buildings")) {
+				Main.vDataFile.getData().getConfigurationSection("buildings").getKeys(false).forEach(key ->{
+					UUID uuid = UUID.fromString(Main.vDataFile.getData().get("buildings." + key).toString());
 					//System.out.println("-------LOADED UUID: " + uuid.toString());
-					Location unserialL = DataFile.unserializeLocation(key);
+					Location unserialL = VolatileDataFile.unserializeLocation(key);
 					//String str = ((String) Main.dataFile.getData().get("buildings." + key));
 					//String newStr = str.substring(str.indexOf(0))
 					//UUID buildUUID = UUID.fromString(str);
@@ -203,7 +208,7 @@ public class Main extends JavaPlugin implements Listener {
 		//battle = new me.WesBag.Toontown.BattleCore.BattleCore(this, data);
 		//cogs = new me.WesBag.Toontown.BattleCore.Cogs.CogsController(this);
 		
-		if (!dataFile.getData().contains("locations.")) {
+		if (!vDataFile.getData().contains("locations.")) {
 			String[] tempLocationNames = {"ttc", "dd", "dg", "mml", "b", "ddl", "sb", "cb", "lb", "bb"};
 			Location ttcL = new Location(getServer().getWorld("world"), 1, 1, 1);
 			Location ddL = new Location(getServer().getWorld("world"), 1, 1, 1);
@@ -217,11 +222,11 @@ public class Main extends JavaPlugin implements Listener {
 			Location bbL = new Location(getServer().getWorld("world"), 1, 1, 1);
 			Location[] tempLocations = {ttcL, ddL, dgL, mmlL, bL, ddlL, sbL, cbL, lbL, bbL};
 			for (int i = 0; i < 1; i++) { //Only sets location ttcL currently, change to i < amount to correct eventually
-				if (!dataFile.getData().contains("locations." + tempLocationNames[i])) {
-					dataFile.getData().set("locations." + tempLocationNames[i], tempLocations[i]);
+				if (!vDataFile.getData().contains("locations." + tempLocationNames[i])) {
+					vDataFile.getData().set("locations." + tempLocationNames[i], tempLocations[i]);
 				}
 			}
-			dataFile.saveDataFile();
+			vDataFile.saveDataFile();
 		}
 	}
 	
@@ -232,10 +237,10 @@ public class Main extends JavaPlugin implements Listener {
 		
 		//Saves all Cog Building Locations to data.yml
 		for (Map.Entry<Location, UUID> entry : CogBuildingController.readyCogBuildings.entrySet()) {
-			String serialL = DataFile.serializeLocation(entry.getKey());
-			if (!Main.dataFile.getData().contains("buildings." + serialL)) {
+			String serialL = VolatileDataFile.serializeLocation(entry.getKey());
+			if (!Main.vDataFile.getData().contains("buildings." + serialL)) {
 				//System.out.println("UUID: " + entry.getValue().get)
-				Main.dataFile.getData().set("buildings." + serialL, entry.getValue().toString());
+				Main.vDataFile.getData().set("buildings." + serialL, entry.getValue().toString());
 			}
 		}
 		/* Maybe replace with this? VVV
@@ -247,7 +252,7 @@ public class Main extends JavaPlugin implements Listener {
 			}
 		}
 		*/
-		Main.dataFile.saveDataFile();
+		Main.vDataFile.saveDataFile();
 	}
 	
 	
@@ -255,8 +260,8 @@ public class Main extends JavaPlugin implements Listener {
         return instance;
     }
     
-    public static DataFile getDataFile() {
-    	return dataFile;
+    public static VolatileDataFile getVolatileDataFile() {
+    	return vDataFile;
     }
 	
 	public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {

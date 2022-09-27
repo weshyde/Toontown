@@ -23,7 +23,7 @@ import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
 import me.WesBag.Toontown.BattleCore.Toons.Toon;
 import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
 import me.WesBag.Toontown.Files.BattleData;
-import me.WesBag.Toontown.Files.DataFile;
+import me.WesBag.Toontown.Files.VolatileDataFile;
 import me.WesBag.Toontown.SchematicUtilities.SchematicPaster;
 import me.WesBag.Toontown.Tasks.CustomEvents.PlayerDestroyBuildingEvent;
 import net.citizensnpcs.Citizens;
@@ -380,10 +380,10 @@ public class CogBuilding {
 	
 	public void adminRemoveBuilding() {
 		CogBuildingController.cogBuildingElevators.remove(elevatorLocation);
-		String serialL = DataFile.serializeLocation(orgLocation);
-		if (Main.dataFile.getData().contains("buildings." + serialL)) {
-			Main.dataFile.getData().set("buildings." + serialL, null); //Clears building from saved file if it exists
-			Main.dataFile.saveDataFile();
+		String serialL = VolatileDataFile.serializeLocation(orgLocation);
+		if (Main.vDataFile.getData().contains("buildings." + serialL)) {
+			Main.vDataFile.getData().set("buildings." + serialL, null); //Clears building from saved file if it exists
+			Main.vDataFile.saveDataFile();
 		}
 		this.levels = -1; //This indicates the building is over to BattleMenu
 		
@@ -432,10 +432,10 @@ public class CogBuilding {
 		//CogBuildingController.cogBuildings.remove(buildingNPC.getUniqueId());
 		//CogBuildingController.cogBuildings2.remove(orgLocation);
 		CogBuildingController.cogBuildingElevators.remove(elevatorLocation);
-		String serialL = DataFile.serializeLocation(orgLocation);
-		if (Main.dataFile.getData().contains("buildings." + serialL)) {
-			Main.dataFile.getData().set("buildings." + serialL, null); //Clears building from saved file if it exists
-			Main.dataFile.saveDataFile();
+		String serialL = VolatileDataFile.serializeLocation(orgLocation);
+		if (Main.vDataFile.getData().contains("buildings." + serialL)) {
+			Main.vDataFile.getData().set("buildings." + serialL, null); //Clears building from saved file if it exists
+			Main.vDataFile.saveDataFile();
 		}
 		this.levels = -1; //This indicates the building is over to BattleMenu
 		

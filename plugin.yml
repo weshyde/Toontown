@@ -30,6 +30,7 @@ commands:
   spawnnpcs:
   setlaff:
   cogbuildings:
+  savestreetbattlelocation:
   fishing:
   book:
   setgagamount:
