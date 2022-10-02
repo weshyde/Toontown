@@ -21,6 +21,7 @@ public class StreetBattlePositioning {
 	public static Map<Integer, Boolean> availableStreetLocs = new HashMap<>();
 	public static Map<Integer, List<Double>> streetLocs = new HashMap<>();
 	//StreetLocs List of double -> 0: X, 1: Y, 2: Z, 3: Yaw, 4: Pitch
+	/*
 	public static void loadAllStreetBattleLocations() {
 		
 		//---- LOOPY LANE ----
@@ -38,15 +39,90 @@ public class StreetBattlePositioning {
 		
 		//---- SILLY STREET ----
 	}
+	*/
 	
-	public static void saveAllStreetBattleLocationsFromFile() {
-		for (int i = 0; i < 10; i++) {
-			Main.fDataFile.getData().set("sLocations.loopyLane." + i, availableStreetLocs);
+	public static void loadAllStreetBattleLocationsFromFile() {
+		String[] streets = {"loopyLane", "punchlinePlace", "sillyStreet"};
+		int locIndex = 1;
+		int streetIndex = 0;
+		int streetLocsID = 1101;
+		int toRemove = 0;
+		String street = streets[streetIndex];
+		
+		while (streetIndex < streets.length) {
+			street = streets[streetIndex];
+			
+			while (Main.fDataFile.getData().contains("sLocations." + street + "." + locIndex)) {
+				String s = Main.fDataFile.getData().getString("sLocations." + street + "." + locIndex);
+				String[] parts = s.split("_");
+				streetLocs.put(streetLocsID, stringToDoubles(parts));
+				availableStreetLocs.put(streetLocsID, false);
+				
+				locIndex++;
+				streetLocsID++;
+				toRemove++;
+			}
+			
+			streetLocsID -= toRemove;
+			toRemove = 0;
+			locIndex = 1;
+			streetIndex++;
+			
+			if (streetIndex < 3) { //Indicates TTC, adds 100
+				streetLocsID += 100;
+			}
+			/* ADD BACK WHEN MORE STREETS ARE IMPLEMENTED!
+			else if (streetIndex < 6) { //Indicates DD
+				if (streetIndex == 3) { //If first street, 2100
+					streetLocsID = 2101;
+				}
+				else { //Else next street
+					streetLocsID += 100;
+				}
+			}
+			else if (streetIndex < 9) { //Indicates DG
+				if (streetIndex == 6) { //If first street in DG, 3100
+					streetLocsID = 3101;
+				}
+				else { //Else next street
+					streetLocsID += 100;
+				}
+			}
+			else if (streetIndex < 12) { //Indicates MML
+				if (streetIndex == 9) {
+					streetLocsID = 4101;
+				}
+				else {
+					streetLocsID += 100;
+				}
+			}
+			else if (streetIndex < 15)  { //Indicates Brrrgh
+				if (streetIndex == 12) {
+					streetLocsID = 5101;
+				}
+				else {
+					streetLocsID += 100;
+				}
+			}
+			else if (streetIndex < 17) { //Indicates DDL
+				if (streetIndex == 15) {
+					streetLocsID = 6101;
+				}
+				else {
+					streetLocsID += 100;
+				}
+			}
+			*/
 		}
 	}
 	
-	public static void loadAllStreetBattleLocationsFromFile() {
-		Main.fDataFile.getData();
+	public static List<Double> stringToDoubles(String[] strs) {
+		List<Double> doubles = new ArrayList<>();
+		for (int i = 0; i < strs.length; i++) {
+			double strDouble = Double.valueOf(strs[i]);
+			doubles.add(strDouble);
+		}
+		return doubles;
 	}
 	
 	public static String doublesToString(List<Double> doubles) {

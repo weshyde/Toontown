@@ -29,7 +29,7 @@ public class SaveStreetBattleLocation implements CommandExecutor {
 					player.sendMessage(ChatColor.WHITE + "X: PlaygroundNum, starting at 1 for TTC");
 					player.sendMessage(ChatColor.WHITE + "Y: StreetNum, starting at 1 for LoopyLane, TTC");
 				}
-				else if (IsIntUtil.isInt(args[0])){
+				else if (IsIntUtil.isInt(args[0])) {
 					int streetNum = IsIntUtil.getInt(args[0]);
 					List<Double> locationList = StreetBattlePositioning.locationToDoubles(player.getLocation());
 					String locationStr = StreetBattlePositioning.doublesToString(locationList);
@@ -37,18 +37,23 @@ public class SaveStreetBattleLocation implements CommandExecutor {
 					int streetLocsNextInt = getNextStreetLocationNum(streetNum);
 					
 					if (streetNum == 11) {
-						Main.fDataFile.getData().set("locations.loopylane.battleLocs." + nextInt, locationStr);
+						Main.fDataFile.getData().set("locations.loopyLane.battleLocs." + nextInt, locationStr);
 						StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
 					}
 					else if (streetNum == 12) {
-						Main.fDataFile.getData().set("locations.punchlineplace.battleLocs." + nextInt, locationStr);
+						Main.fDataFile.getData().set("locations.punchlinePlace.battleLocs." + nextInt, locationStr);
 						StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
 					}
 					else if (streetNum == 13) {
-						Main.fDataFile.getData().set("locations.sillystreet.battleLocs." + nextInt, locationStr);
+						Main.fDataFile.getData().set("locations.sillyStreet.battleLocs." + nextInt, locationStr);
 						StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
 					}
+					else {
+						player.sendMessage(Prefixes.Admin + ChatColor.RED + " Street number out of range!");
+						return false; //Exits so file doesn't save
+					}
 					//Eventually expand once more streets have been implemented! 9-27-22
+					Main.fDataFile.saveDataFile();
 				}
 				else {
 					player.sendMessage(Prefixes.Admin + ChatColor.RED + " Street number not an int!");
