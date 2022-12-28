@@ -16,7 +16,7 @@ public class CatchingGame {
 	public static List<Location> arenasFree = new ArrayList<>();
 	public static List<UUID> playersInCG = new ArrayList<>();
 	
-	private CatchGameListener listener;
+	private CatchingGameListener listener;
 	
 	public CatchingGame() {
 		
@@ -26,7 +26,7 @@ public class CatchingGame {
 		Location arena = getArena();
 		if (arena == null) return null;
 		
-		listener = new CatchGameListener(gameManager, rewardManager);
+		listener = new CatchingGameListener(gameManager, rewardManager);
 		
 		int xMove = 5;
 		for (UUID pUUID : players) {

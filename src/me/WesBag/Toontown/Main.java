@@ -17,6 +17,7 @@ import me.WesBag.Toontown.BattleCore.Cogs.CogBuildings.CogBuildingController;
 import me.WesBag.Toontown.BattleCore.Cogs.CogTraits.CogBuildingTrait;
 import me.WesBag.Toontown.BattleCore.Toons.ToonListener;
 import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
+import me.WesBag.Toontown.Commands.Admin.CenterMe;
 import me.WesBag.Toontown.Commands.Admin.ChangeSkin;
 import me.WesBag.Toontown.Commands.Admin.CogBuildingsCommand;
 import me.WesBag.Toontown.Commands.Admin.FishingBucketMenuCommand;
@@ -136,6 +137,7 @@ public class Main extends JavaPlugin implements Listener {
 		getCommand("throwitem").setExecutor(new ThrowItemAnimation());
 		getCommand("spawnnpcs").setExecutor(new TestCommand());
 		getCommand("spawnbuilding").setExecutor(new TestCommand());
+		getCommand("centerme").setExecutor(new CenterMe());
 		getCommand("testpathing").setExecutor(new TestCommand());
 		getCommand("testbuildinganimation").setExecutor(new TestCommand());
 		getCommand("savestreetbattlelocation").setExecutor(new SaveStreetBattleLocation());

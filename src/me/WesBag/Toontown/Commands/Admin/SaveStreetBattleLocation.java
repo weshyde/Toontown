@@ -38,21 +38,26 @@ public class SaveStreetBattleLocation implements CommandExecutor {
 					
 					if (streetNum == 11) {
 						Main.fDataFile.getData().set("locations.loopyLane.battleLocs." + nextInt, locationStr);
-						StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
+						//StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
+						StreetBattlePositioning.saveNewLocation(streetLocsNextInt, locationList);
+						System.out.println("Saved loc under num: " + streetLocsNextInt);
 					}
 					else if (streetNum == 12) {
 						Main.fDataFile.getData().set("locations.punchlinePlace.battleLocs." + nextInt, locationStr);
-						StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
+						//StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
+						StreetBattlePositioning.saveNewLocation(streetLocsNextInt, locationList);
 					}
 					else if (streetNum == 13) {
 						Main.fDataFile.getData().set("locations.sillyStreet.battleLocs." + nextInt, locationStr);
-						StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
+						//StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
+						StreetBattlePositioning.saveNewLocation(streetLocsNextInt, locationList);
 					}
 					else {
 						player.sendMessage(Prefixes.Admin + ChatColor.RED + " Street number out of range!");
 						return false; //Exits so file doesn't save
 					}
 					//Eventually expand once more streets have been implemented! 9-27-22
+					player.sendMessage(Prefixes.Admin + ChatColor.GREEN + " Successfully saved battle location " + streetLocsNextInt);
 					Main.fDataFile.saveDataFile();
 				}
 				else {
@@ -66,6 +71,7 @@ public class SaveStreetBattleLocation implements CommandExecutor {
 	//Helper function to return the size of the amount of locations on passed street
 	public int getStreetLocationsSize(int streetNum) {
 		streetNum *= 100;
+		streetNum++;
 		int size = 0;
 		while (StreetBattlePositioning.streetLocs.containsKey(streetNum)) {
 			size++;
@@ -77,10 +83,10 @@ public class SaveStreetBattleLocation implements CommandExecutor {
 	//Helper function to return the next available street location id for passed street
 	public int getNextStreetLocationNum(int streetNum) {
 		streetNum *= 100;
+		streetNum++;
 		while (StreetBattlePositioning.streetLocs.containsKey(streetNum)) {
 			streetNum++;
 		}
-		streetNum++;
 		return streetNum;
 	}
 

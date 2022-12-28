@@ -180,23 +180,43 @@ public class StreetBattlePositioning {
 	}
 	
 	public static Location anchorStreetBattle(int regionLocID, Location curLoc) {
+		System.out.println("RegionLocID: " + regionLocID);
+		regionLocID*= 100;
+		regionLocID++;
+		int originalLocID = regionLocID;
+		System.out.println("StreetLocs size: " + streetLocs.size());
 		List<List<Double>> tempList = new ArrayList<>();
+		Map<Integer, List<Double>> tempList2 = new HashMap<>();
 		
 		while (streetLocs.containsKey(regionLocID) && (availableStreetLocs.get(regionLocID) == false)) { //Formulates list of available spots on the same street
-			tempList.add(streetLocs.get(regionLocID));
+			//tempList.add(streetLocs.get(regionLocID));
+			tempList2.put(regionLocID, streetLocs.get(regionLocID));
 			regionLocID++;
+			System.out.println("Found available street loc on street!");
 		}
 		
 		Location anchoredBattle = null;
-		
+		/*
 		for (int i = 0; i < tempList.size(); i++) { //Loop to find the nearest place to anchor the street battle
 			double distance = curLoc.distance(intsToLoc(tempList.get(i)));
-			if ( (distance < 15) && (anchoredBattle != null) && (distance < anchoredBattle.distance(curLoc))) {
+			if (((distance < 15) && (anchoredBattle != null) && (distance < anchoredBattle.distance(curLoc))) | ((distance < 15) && (anchoredBattle == null))) {
 				anchoredBattle = intsToLoc(tempList.get(i));
+			}
+		} Commenting to replace with Map of Int and List instead of ListList
+		*/
+		for (int i = 0; i < tempList2.size(); i++) {
+			originalLocID += i;
+			double distance = curLoc.distance(intsToLoc(tempList2.get(originalLocID)));
+			if (((distance < 15) && (anchoredBattle != null) && (distance < anchoredBattle.distance(curLoc))) | ((distance < 15) && (anchoredBattle == null))) {
+				anchoredBattle = intsToLoc(tempList2.get(originalLocID));
 			}
 		}
 		
-		
 		return anchoredBattle;
+	}
+	
+	public static void saveNewLocation(int locInt, List<Double> locList) {
+		streetLocs.put(locInt, locList);
+		availableStreetLocs.put(locInt, false);
 	}
 }

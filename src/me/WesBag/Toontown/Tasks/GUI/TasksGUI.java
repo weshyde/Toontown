@@ -162,7 +162,7 @@ public class TasksGUI implements Listener {
 					break;
 				case 14:
 					//qp.getQuester(e.getWhoClicked().getUniqueId()).offerQuest(shownQuests.get(2), false);
-					qp.getQuester(pUUID).offerQuest(playersTaskGUIs.get(pUUID).getShownQuests().get(3), false);
+					qp.getQuester(pUUID).offerQuest(playersTaskGUIs.get(pUUID).getShownQuests().get(2), false);
 					//playersChoosingTasks.remove(e.getWhoClicked().getUniqueId());
 					//playersTaskInventorys.remove(e.getWhoClicked().getUniqueId());
 					playersTaskGUIs.remove(pUUID);

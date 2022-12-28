@@ -12,17 +12,17 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/wesba/Desktop/Toontown Plugin Stuff/Jar Dependents/Citizens-2.0.29-b2461.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wesba/Desktop/Toontown Plugin Stuff/Jar Dependents/spigot-1.17.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wesba/Desktop/Toontown Plugin Stuff/Jar Dependents/Quests-4.4.0.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wesba/Desktop/Toontown Plugin Stuff/Jar Dependents/worldguard-bukkit-7.0.6-dist.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wesba/Desktop/Toontown Plugin Stuff/Jar Dependents/worldedit-bukkit-7.2.7.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wesba/Desktop/Toontown Plugin Stuff/Jar Dependents/WorldGuardEvents-1.18.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/wesba/Desktop/Toontown Plugin Stuff/Jar Dependents/CustomQuests.jar"/>
 	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="C:/Users/Weston Hyde/Desktop/TTBattleCore Plugin/worldedit-bukkit-7.2.13.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Weston Hyde/Desktop/TTBattleCore Plugin/WorldGuardEvents-1.18.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Weston Hyde/Desktop/TTBattleCore Plugin/worldguard-bukkit-7.0.7-dist.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Weston Hyde/Desktop/TTBattleCore Plugin/Quests-4.6.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Weston Hyde/Desktop/TTBattleCore Plugin/Citizens-2.0.30-b2830.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Weston Hyde/Desktop/TTBattleCore Plugin/spigot-1.17.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Weston Hyde/Desktop/TTBattleCore Plugin/CustomQuests.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

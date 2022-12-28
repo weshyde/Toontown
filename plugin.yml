@@ -28,6 +28,7 @@ commands:
   startinvasion:
   throwitem:
   spawnnpcs:
+  centerme:
   setlaff:
   cogbuildings:
   savestreetbattlelocation:
