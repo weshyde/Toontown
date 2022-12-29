@@ -37,18 +37,18 @@ public class SaveStreetBattleLocation implements CommandExecutor {
 					int streetLocsNextInt = getNextStreetLocationNum(streetNum);
 					
 					if (streetNum == 11) {
-						Main.fDataFile.getData().set("locations.loopyLane.battleLocs." + nextInt, locationStr);
+						Main.fDataFile.getData().set("streets.loopyLane.battleLocs." + nextInt, locationStr);
 						//StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
 						StreetBattlePositioning.saveNewLocation(streetLocsNextInt, locationList);
 						System.out.println("Saved loc under num: " + streetLocsNextInt);
 					}
 					else if (streetNum == 12) {
-						Main.fDataFile.getData().set("locations.punchlinePlace.battleLocs." + nextInt, locationStr);
+						Main.fDataFile.getData().set("streets.punchlinePlace.battleLocs." + nextInt, locationStr);
 						//StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
 						StreetBattlePositioning.saveNewLocation(streetLocsNextInt, locationList);
 					}
 					else if (streetNum == 13) {
-						Main.fDataFile.getData().set("locations.sillyStreet.battleLocs." + nextInt, locationStr);
+						Main.fDataFile.getData().set("streets.sillyStreet.battleLocs." + nextInt, locationStr);
 						//StreetBattlePositioning.streetLocs.put(streetLocsNextInt, locationList);
 						StreetBattlePositioning.saveNewLocation(streetLocsNextInt, locationList);
 					}

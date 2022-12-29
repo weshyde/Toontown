@@ -125,7 +125,7 @@ public class StreetBattlePositioning {
 		return doubles;
 	}
 	
-	public static String doublesToString(List<Double> doubles) {
+	public static String doublesToString(List<Double> doubles) { //Only works for list of doubles at least 5 in length (locations converted to doubles)
 		String s = doubles.get(0).toString() + "_" + doubles.get(1).toString() + "_" + doubles.get(2).toString() + "_" + doubles.get(3).toString() + "_" + doubles.get(4).toString();
 		return s;
 	}
@@ -158,6 +158,12 @@ public class StreetBattlePositioning {
 		doubles.add(pitch);
 		
 		return doubles;
+	}
+	
+	public static Location stringToLocation(String s) {
+		String[] parts = s.split("_");
+		Location l = new Location(Bukkit.getWorld("world"), Double.parseDouble(parts[0]), Double.parseDouble(parts[1]), Double.parseDouble(parts[2]), Float.parseFloat(parts[3]), Float.parseFloat(parts[4]));
+		return l;
 	}
 	
 	public static Location intsToLoc(int streetLocID) {
