@@ -1,216 +1,247 @@
 package me.WesBag.Toontown.Trolley.Utilities;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.UUID;
-import java.util.logging.Level;
 
-import org.bukkit.Material;
-import org.bukkit.entity.Item;
-import org.bukkit.event.Listener;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 
 import me.WesBag.Toontown.Main;
+import me.WesBag.Toontown.Streets.StreetBattlePositioning;
+import me.WesBag.Toontown.Trolley.NewTrolley;
 import me.WesBag.Toontown.Trolley.Trolley;
-import me.WesBag.Toontown.Trolley.Minigames.MinigameTimer;
+import me.WesBag.Toontown.Trolley.Minigames.Minigame;
+import me.WesBag.Toontown.Trolley.Minigames.MinigameInterface;
+import me.WesBag.Toontown.Trolley.Minigames.CannonGame.CannonGame;
+import me.WesBag.Toontown.Trolley.Minigames.IceSlide.NewIceSlide;
+import me.WesBag.Toontown.Trolley.Minigames.TagGame.ToonTag;
 
 public class GameManager {
 	
-	public static List<Class<?>> allGames = new ArrayList<Class<?>>();
-	public static String[] allGameNames = {"Cannon-Game", "Ice-Slide"}; //Add as minigames are added
-	public static List<GameManager> allGMs = new ArrayList<>();
-	private RewardManager rewardManager;
-	private GameListener gameListener; //Delete maybe?
-	private Listener gameListener2;
+	public static List<GameManager> allGameManagers = new ArrayList<>();
+	public static final String[] allGameNames = {"Cannon-Game", "Ice-Slide", "Toon-Tag", "Catching-Game"};
+	
+	private NewTrolley trolley;
 	private GameState gameState;
-	private String gameName;
-	private Trolley trolley;
-	private Location arena;
-	private Class<?> gameClass;
-	private BasicCountdown countdown;
-	private MinigameTimer gameTimer;
-	private List<UUID> playersIn = new ArrayList<UUID>();
-	//private List<Integer> playerPoints = new ArrayList<Integer>();
-	private List<UUID> playersDone = new ArrayList<UUID>();
+	private NewRewardManager rewardManager;
+	private NewCountdownClock countdownClock;
+	private int gameChoosen;
+	private Minigame gameClass;
+	private MinigameInterface gameClass2;
+	private int playground; //Playground/Difficulty
+	private Location arena = null;
+	private List<UUID> players = new ArrayList<>();
+	private List<UUID> playersDone = new ArrayList<>();
 	private Map<UUID, Location> playerSpawns = new HashMap<>();
+	
 	private final Main main;
 	
-	public GameManager(Main main, Trolley trolley, List<UUID> players) {
-		int low = 1; //SUPPOSED TO BE 0, CHANGED TO 1 to DEBUG
-		int high = 2; //Increase as minigames are added
-		allGMs.add(this);
-		//int conditionType = 0;
-		//int gamesTried = 0;
+	public GameManager(Main main, NewTrolley trolley, List<UUID> players, int playground) {
+		this.main = main;
+		this.trolley = trolley;
+		allGameManagers.add(this);
+		this.rewardManager = new NewRewardManager(this);
+		this.players.addAll(players);
+		this.playground = playground;
 		
-		playersIn.addAll(players);
+		Random r = new Random();
 		
-		this.arena = null;
-		int timesRan = 0;
-		while (this.arena == null) {
+		while(arena == null) {
+		
+			//gameChoosen = r.nextInt(2); //Make single player games lower, multiplayer games higher. Add in fix to not allow multiplayer game to be choosen with only one player 1-1-23
+			gameChoosen = 2;
+			System.out.println("Minigame choosen = " + gameChoosen);
+			if (gameChoosen == 0) { //Cannon Game
+				gameClass2 = new CannonGame(this);
+				//this.arena = ((CannonGame) gameClass).getArena();
+				this.arena = gameClass2.getArena();
+			}
+			else if (gameChoosen == 1) {
+				gameClass2 = new NewIceSlide(this);
+				this.arena = gameClass2.getArena();
+			}
+			else if (gameChoosen == 2) {
+				gameClass2 = new ToonTag(this);
+				this.arena = gameClass2.getArena();
+			}
+			break; //TEMPORARY
+		}
+		
+		for (UUID uuid : players) {
+			playerSpawns.put(uuid, Bukkit.getPlayer(uuid).getLocation());
+		}
+		
+		/*
+		int timesRan = 0; //Infinite loop proofing
+		while (arena == null) {
 			Random r = new Random();
-			int result = r.nextInt(high - low) + low;
-		
-			this.gameName = allGameNames[result].replace("-", " ");
-			this.gameClass = allGames.get(result);
-			this.rewardManager = new RewardManager(this, playersIn);
-			//Class<?> testClass = Class.forName("me.WesBag.Toontown.Trolley.Minigames." + allGameNames[result].replace("-", "") + "." + allGameNames[result].replace(" ", ""));
+			int gameChoosen = r.nextInt(allGameNames.length - 0);
+			
 			Method loadArenaMethod = null;
 			try {
-				Class<?> testClass = Class.forName("me.WesBag.Toontown.Trolley.Minigames." + allGameNames[result].replace("-", "") + "." + allGameNames[result].replace("-", ""));
-				loadArenaMethod = testClass.getMethod("loadArena", GameManager.class, RewardManager.class, List.class);
-				//conditionType = gameClass.getField("earnCondition").getInt(gameClass.getDeclaredConstructor().newInstance());
-				//testClass object = new testClass();
-				arena = (Location) loadArenaMethod.invoke(testClass.getDeclaredConstructor().newInstance(), this, this.rewardManager, this.playersIn);
+				Class<?> gameClass = Class.forName("me.WesBag.Toontown.Trolley.Minigames." + allGameNames[gameChoosen].replace("-", "") + "." + allGameNames[gameChoosen].replace("-", ""));
+				loadArenaMethod = gameClass.getMethod("loadArena", NewGameManager.class);
+				arena = (Location) loadArenaMethod.invoke(gameClass.getDeclaredConstructor().newInstance(), this);
 			} catch (NoSuchMethodException | InvocationTargetException | IllegalAccessException | ClassNotFoundException | InstantiationException e) {
 				e.printStackTrace();
 			}
-			//gamesTried++;
-			//if (gamesTried == high)
+			
 			timesRan++;
-			if (timesRan > 4)
+			if (timesRan > 10) {
+				System.err.println("NewGameManager ran into an infinite loop!");
 				break;
-		}
-		
-		for (UUID pUUID : playersIn) {
-			playerSpawns.put(pUUID, Bukkit.getPlayer(pUUID).getLocation());
-		}
-		
-		this.main = main;
-		this.trolley = trolley;
-		this.setGameState(GameState.LOBBY);
-		/*
-		switch(conditionType) {
-		
-		case 1: //Earn points by reaching set area (Material)
-			Material[] earnBlocks = null;
-			try {
-				earnBlocks = (Material[]) gameClass.getField("earnBlocks").get(gameClass);
-			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-				e.printStackTrace();
 			}
-			this.gameListener = new GameListener(this, conditionType, earnBlocks);
-			break;
-		
-		case 2:
-			earnBlocks = null;
-			try {
-				earnBlocks = (Material[]) gameClass.getField("earnBlocks").get(gameClass);
-			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-				e.printStackTrace();
-			}
-			this.gameListener = new GameListener(this, conditionType, earnBlocks);
-			break;
-			
-		case 3: //Earn points by collecting items
-			Item[] earnItems = null;
-			try {
-				earnItems = (Item[]) gameClass.getField("earnItems").get(gameClass);
-			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
-				e.printStackTrace();
-			}
-			this.gameListener = new GameListener(this, conditionType, earnItems);
-			break;
-			
-		case 4: //Earn points by meeting specific conditions
-			break;
-		
 		}
 		*/
-		//this.setGameState(GameState.READY);
+		this.setGameState(GameState.LOBBY);
 	}
 	
-	public static GameManager getGameManager(UUID pUUID) {
-		for (GameManager GM : allGMs) {
-			if (GM.getPlayers().contains(pUUID))
-				return GM;
+	public void setGameState(GameState gameState) {
+		this.gameState = gameState;
+		
+		switch(gameState) {
+		case LOBBY:
+			sendMessage(GamePrefixes.Trolley + " You're playing " + allGameNames[gameChoosen]);
+			this.setGameState(GameState.READY);
+			break;
+		case READY:
+			//Show tutorials
+			this.setGameState(GameState.STARTING);
+			break;
+		case STARTING:
+			//Start game countdown
+			this.countdownClock = new NewCountdownClock(this, 5, GameState.RUNNING);
+			this.countdownClock.runTaskTimer(main, 0, 20);
+			break;
+		case RUNNING:
+			if (this.countdownClock != null) this.countdownClock.cancel();
+			gameClass2.start();
+			//NewMinigameClock gameClock = new NewMinigameClock(this); Moved to individual minigames because of round based games
+			//gameClock.runTaskTimer(main, 20, 20);
+			//this.rewardManager.passClock(gameClock);
+			break;
+		case REWARD:
+			this.rewardManager.giveRewards();
+			this.gameClass2.unloadArena();
+			/*
+			switch(gameChoosen) {
+			case 0:
+				((CannonGame) this.gameClass).unloadArena();
+				break;
+			case 1:
+				break;
+			}
+			break;
+			*/
+		case FINISH:
+			this.rewardManager = null;
+			this.gameClass2 = null;
+			System.out.println("Game finished!");
+			this.trolley.nextGameGUI();
+			break;
+		default:
+			break;
+		}
+	}
+	
+	public void playerDone(UUID uuid) {
+		playersDone.add(uuid);
+		if (playersDone.size() == players.size()) {
+			setGameState(GameState.REWARD);
+		}
+	}
+	
+	public void sendMessage(String msg) {
+		for (UUID player : players) {
+			Bukkit.getPlayer(player).sendMessage(msg);
+		}
+	}
+	
+	public static GameManager getGameManager(UUID uuid) {
+		for (GameManager gm : allGameManagers) {
+			if (gm.getPlayers().contains(uuid)) {
+				return gm;
+			}
 		}
 		return null;
 	}
 	
-	public RewardManager getRewardManager() {
+	public NewRewardManager getRewardManager() {
 		return this.rewardManager;
 	}
 	
-	public void resetPlayerLocation(UUID pUUID) {
-		if (playerSpawns.containsKey(pUUID))
-			Bukkit.getPlayer(pUUID).teleport(playerSpawns.get(pUUID));
+	public void passClock(NewMinigameClock clock) {
+		this.rewardManager.passClock(clock);
 	}
 	
+	public MinigameInterface getGame() {
+		return gameClass2;
+	}
 	
-	
-	public void setGameState(GameState gameState) {
-		if (this.gameState == GameState.RUNNING && gameState == GameState.STARTING) return;
-		
-		this.gameState = gameState;
-		
-		switch(gameState) {
-		
-		case LOBBY:
-			Bukkit.broadcastMessage(GamePrefixes.Trolley + " You're playing " + gameName + "!");
-			this.setGameState(GameState.READY);
-			break;
-		
-		case READY:
-			//this.rewardManager = new RewardManager(this, playersIn);
-			//SHOW TUTORIALS?
-			this.setGameState(GameState.STARTING);
-			break;
-			
-		case STARTING:
-			Bukkit.broadcastMessage("Starting!");
-				
-			this.countdown = new BasicCountdown(this, 5, GameState.RUNNING, playersIn);
-			this.countdown.runTaskTimer(main, 0, 20);
-			break;
-			
-		case RUNNING:
-			Bukkit.broadcastMessage("Running!");
-			if (this.countdown != null) this.countdown.cancel();
-			this.gameTimer = new MinigameTimer(this, playersIn);
-			this.rewardManager.passTimer(gameTimer);
-			//this.rewardManager = new RewardManager(this, gameTimer, playersIn);
-			this.gameTimer.runTaskTimer(main, 20, 20);
-			break;
-		
-		case REWARD:
-			this.rewardManager.giveRewards();
-			Bukkit.broadcastMessage("Reward time!");
-			break;
-		
-		case FINISH:
-			this.rewardManager = null;
-			this.gameListener = null;
-			this.gameName = null;
-			this.trolley.nextGameGUI();
-			break;
-			
-		default:
-			Bukkit.getLogger().log(Level.SEVERE ,"GAME STATE WRONG!");
-			break;
-				
-		
-		}
+	public GameState getGameState() {
+		return gameState;
 	}
 	
 	public List<UUID> getPlayers() {
-		return playersIn;
+		return players;
 	}
 	
-	public void playerDone(UUID pUUID) {
-		playersDone.add(pUUID);
-		if (playersDone.size() == playersIn.size()) {
-			this.setGameState(GameState.REWARD);
+	public int getPlayground() {
+		return this.playground;
+	}
+	
+	public void resetPlayer(UUID uuid) {
+		Bukkit.getPlayer(uuid).teleport(playerSpawns.get(uuid));
+	}
+	
+	public void resetPlayerVehicle(UUID uuid) {
+		Bukkit.getPlayer(uuid).getVehicle().teleport(playerSpawns.get(uuid));
+	}
+	
+	public static void loadMinigameArenas() {
+		int index = 1;
+		while (Main.fDataFile.getData().contains("minigames.cannongame." + index)) {
+			Location l1 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.cannongame." + index + ".1"));
+			Location l2 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.cannongame." + index + ".2"));
+			List<Location> ls = new ArrayList<>();
+			ls.add(l1);
+			ls.add(l2);
+			CannonGame.arenas.add(ls);
+			CannonGame.freeArenas.put((index-1), false);
+			index++;
 		}
+		index = 1;
+		while (Main.fDataFile.getData().contains("minigames.iceslide." + index)) {
+			Location l1 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.iceslide." + index + ".1"));
+			Location l2 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.iceslide." + index + ".2"));
+			Location l3 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.iceslide." + index + ".3"));
+			Location l4 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.iceslide." + index + ".4"));
+			List<Location> ls = new ArrayList<>();
+			ls.add(l1);
+			ls.add(l2);
+			ls.add(l3);
+			ls.add(l4);
+			NewIceSlide.arenas.add(ls);
+			NewIceSlide.freeArenas.put((index-1), false);
+			index++;
+		}
+		index = 1;
+		while (Main.fDataFile.getData().contains("minigames.toontag." + index)) {
+			Location l1 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.toontag." + index + ".1"));
+			Location l2 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.toontag." + index + ".2"));
+			Location l3 = StreetBattlePositioning.stringToLocation(Main.fDataFile.getData().getString("minigames.toontag." + index + ".3"));
+			List<Location> ls = new ArrayList<>();
+			ls.add(l1);
+			ls.add(l2);
+			ls.add(l3);
+			ToonTag.arenas.add(ls);
+			ToonTag.freeArenas.put((index-1), false);
+			index++;
+		}
+		//Add more eventually
 	}
-	
-	public GameState getState() {
-		return gameState;
-	}
-
 }

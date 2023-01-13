@@ -4,11 +4,11 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class NewCountdownClock extends BukkitRunnable {
 	
-	private NewGameManager gameManager;
+	private GameManager gameManager;
 	private GameState newGameState;
 	private int time;
 	
-	public NewCountdownClock(NewGameManager gameManager, int time, GameState gameState) {
+	public NewCountdownClock(GameManager gameManager, int time, GameState gameState) {
 		this.gameManager = gameManager;
 		this.time = time;
 		this.newGameState = gameState;
@@ -21,7 +21,7 @@ public class NewCountdownClock extends BukkitRunnable {
 			this.gameManager.setGameState(newGameState);
 			return;
 		}
-		this.gameManager.sendMessage(GamePrefixes.Trolley + " " + time + " seconds left");
+		this.gameManager.sendMessage(GamePrefixes.Trolley + " " + time);
 			
 		time--;
 	}

@@ -13,7 +13,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 
 import me.WesBag.Toontown.Main;
-import me.WesBag.Toontown.Trolley.Minigames.CannonGame.CGListener;
 import me.WesBag.Toontown.Trolley.Utilities.GameInventorys;
 import me.WesBag.Toontown.Trolley.Utilities.GameManager;
 import me.WesBag.Toontown.Trolley.Utilities.RewardManager;

@@ -4,10 +4,10 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class NewMinigameClock extends BukkitRunnable {
 	
-	private NewGameManager gameManager;
+	private GameManager gameManager;
 	private int time;
 	
-	public NewMinigameClock(NewGameManager gameManager) {
+	public NewMinigameClock(GameManager gameManager) {
 		this.gameManager = gameManager;
 		this.time = 90;
 	}

@@ -11,16 +11,21 @@ import me.WesBag.Toontown.Main;
 
 public class NewRewardManager {
 	
-	private NewGameManager gameManager;
+	private GameManager gameManager;
 	private NewMinigameClock gameClock;
 	private Map<UUID, Integer> playersWinnings = new HashMap<>();
 	
-	public NewRewardManager(NewGameManager gameManager) {
+	public NewRewardManager(GameManager gameManager) {
 		this.gameManager = gameManager;
 	}
 	
 	public void addReward(UUID uuid, int winnings) {
-		playersWinnings.put(uuid, winnings);
+		if (playersWinnings.containsKey(uuid)) {
+			playersWinnings.put(uuid, playersWinnings.get(uuid)+winnings);
+		}
+		else {
+			playersWinnings.put(uuid, winnings);
+		}
 	}
 	
 	public void addTimeReward(UUID uuid) {

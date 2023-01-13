@@ -47,7 +47,7 @@ public class Trolley {
 	}
 	
 	public void startGames() {
-		this.gameManager = new GameManager(Main.getInstance(), this, trolleyPlayers);
+		//this.gameManager = new GameManager(Main.getInstance(), this, trolleyPlayers);
 	}
 	
 	public void startNextGame() {
@@ -140,7 +140,7 @@ public class Trolley {
 	}
 	
 	public void nextGameGUI() {
-		this.nextGameTimer = new NextGameCountdown(this);
+		//this.nextGameTimer = new NextGameCountdown(this);
 		this.nextGameTimer.runTaskTimer(Main.getInstance(), 0, 20);
 		this.gameManager = null;
 		for (UUID pUUID : trolleyPlayers) {

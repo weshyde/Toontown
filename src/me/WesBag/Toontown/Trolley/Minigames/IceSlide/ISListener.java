@@ -77,13 +77,13 @@ public class ISListener implements Listener {
 	public void onPlayerMove(PlayerMoveEvent e) {
 		if (!(IceSlide.playerInGame(e.getPlayer().getUniqueId()))) return;
 		
-		GameManager tempGM = GameManager.getGameManager(e.getPlayer().getUniqueId());
-		if (tempGM == null) return;
+		//GameManager tempGM = GameManager.getGameManager(e.getPlayer().getUniqueId());
+		//if (tempGM == null) return;
 		
-		if (tempGM.getState() == GameState.STARTING || tempGM.getState() == GameState.LOBBY) {
-			e.setCancelled(true);
-			return;
-		}
+		//if (tempGM.getState() == GameState.STARTING || tempGM.getState() == GameState.LOBBY) {
+			//e.setCancelled(true);
+			//return;
+		//}
 		
 		//if ()e.getTo()
 	}

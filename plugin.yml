@@ -29,6 +29,7 @@ commands:
   throwitem:
   spawnnpcs:
   centerme:
+  createminigame:
   setlaff:
   cogbuildings:
   savestreetbattlelocation:

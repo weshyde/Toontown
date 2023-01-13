@@ -12,20 +12,28 @@ import org.bukkit.util.Vector;
 
 import me.WesBag.Toontown.Trolley.Utilities.GamePrefixes;
 import me.WesBag.Toontown.Trolley.Utilities.GameState;
-import me.WesBag.Toontown.Trolley.Utilities.NewGameManager;
+import me.WesBag.Toontown.Trolley.Utilities.GameManager;
 
 public class CannonGameListener implements Listener {
 	
-	private NewGameManager gameManager;
+	private GameManager gameManager;
+	private CannonGame cannonGame;
 	
-	public CannonGameListener(NewGameManager gameManager) {
+	public CannonGameListener() {
+		
+	}
+	
+	public CannonGameListener(GameManager gameManager, CannonGame cannonGame) {
 		this.gameManager = gameManager;
+		this.cannonGame = cannonGame;
 	}
 	
 	@EventHandler
 	public void onPlayerRightClick(PlayerInteractEvent e) {
-		if (!(NewCannonGame.isPlaying(e.getPlayer().getUniqueId()))) return;
+		if (!(CannonGame.isPlaying(e.getPlayer().getUniqueId()))) return;
+		//if (!(this.cannonGame.isPlayingLocal(e.getPlayer().getUniqueId()))) return;
 		if (e.getItem().getItemMeta() == null) return;
+		if (GameManager.getGameManager(e.getPlayer().getUniqueId()).getGameState() != GameState.RUNNING) return;
 		
 		if (e.getItem().getItemMeta().getDisplayName().contains("Launch") && e.getItem().getType() == Material.FEATHER) {
 			Player p = e.getPlayer();
@@ -33,7 +41,7 @@ public class CannonGameListener implements Listener {
 			for (int i = 1; i <= 9; i++) {
 				String strNum = Integer.toString(i);
 				if (e.getItem().getItemMeta().getDisplayName().contains(strNum)) {
-					p.setVelocity(v.multiply(i/10));
+					p.setVelocity(v.multiply(i));
 					p.sendMessage(GamePrefixes.Trolley + " Launched! (" + i + ")");
 				}
 			}
@@ -42,27 +50,27 @@ public class CannonGameListener implements Listener {
 	
 	@EventHandler
 	public void onPlayerMove(PlayerMoveEvent e) {
-		if (!(NewCannonGame.isPlaying(e.getPlayer().getUniqueId()))) return;
+		if (!(CannonGame.isPlaying(e.getPlayer().getUniqueId()))) return;
+		//if (this.gameManager == null) e.getPlayer().sendMessage("Game manager null");
+		//if (this.cannonGame == null) e.getPlayer().sendMessage("Cannon game null");
+		//if (!(this.cannonGame.isPlayingLocal(e.getPlayer().getUniqueId()))) return;
+		GameManager gameManager = GameManager.getGameManager(e.getPlayer().getUniqueId());
+		
 		
 		if (gameManager.getGameState() == GameState.STARTING || gameManager.getGameState() == GameState.LOBBY) {
-			e.setCancelled(true);
-			return;
+			e.setCancelled(true);;
 		}
-		Material landedOn = e.getTo().getBlock().getRelative(BlockFace.DOWN).getType();
-		if (landedOn == Material.WATER || landedOn == Material.IRON_BLOCK) {
-			gameManager.getRewardManager().addTimeReward(e.getPlayer().getUniqueId());
-			gameManager.playerDone(e.getPlayer().getUniqueId());
-			//gameManager.getRewardManager().giveTimeReward(e.getPlayer().getUniqueId());
-			//gameManager.playerDone(e.getPlayer().getUniqueId());
-			//this.rewardManager.giveTimeReward(e.getPlayer().getUniqueId());
-			
-		}
-		else if (landedOn == Material.GRASS_BLOCK || landedOn == Material.DARK_OAK_PLANKS) {
-			e.getPlayer().sendMessage(GamePrefixes.Trolley + " You've been reset");
-			
-			//PLAYER MISSED, TELEPORT BACK
-			//e.getPlayer().sendMessage(GamePrefixes.Trolley + " You've been Reset!");
-			//gameManager.resetPlayerLocation(e.getPlayer().getUniqueId());
+		else {
+			Material landedOn = e.getTo().getBlock().getRelative(BlockFace.DOWN).getType();
+			if (landedOn == Material.WATER || landedOn == Material.IRON_BLOCK) {
+				gameManager.getRewardManager().addTimeReward(e.getPlayer().getUniqueId());
+				gameManager.playerDone(e.getPlayer().getUniqueId());
+				
+			}
+			else if (landedOn == Material.GRASS_BLOCK || landedOn == Material.DARK_OAK_PLANKS) {
+				e.getPlayer().sendMessage(GamePrefixes.Trolley + " You've been reset");
+				gameManager.resetPlayer(e.getPlayer().getUniqueId());
+			}
 		}
 	}
 }

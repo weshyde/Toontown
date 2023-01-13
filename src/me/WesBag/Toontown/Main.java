@@ -20,6 +20,7 @@ import me.WesBag.Toontown.BattleCore.Toons.ToonsController;
 import me.WesBag.Toontown.Commands.Admin.CenterMe;
 import me.WesBag.Toontown.Commands.Admin.ChangeSkin;
 import me.WesBag.Toontown.Commands.Admin.CogBuildingsCommand;
+import me.WesBag.Toontown.Commands.Admin.CreateMinigameMenu;
 import me.WesBag.Toontown.Commands.Admin.FishingBucketMenuCommand;
 import me.WesBag.Toontown.Commands.Admin.GiveJellybeans;
 import me.WesBag.Toontown.Commands.Admin.HealLaff;
@@ -55,11 +56,14 @@ import me.WesBag.Toontown.Streets.StreetsController;
 import me.WesBag.Toontown.Tasks.Tasks;
 import me.WesBag.Toontown.Tasks.TasksController;
 import me.WesBag.Toontown.Tasks.GUI.TasksGUI;
+import me.WesBag.Toontown.Trolley.NewTrolleyListener;
 import me.WesBag.Toontown.Trolley.TrolleyListener;
-import me.WesBag.Toontown.Trolley.Minigames.CannonGame.CGListener;
 import me.WesBag.Toontown.Trolley.Minigames.CannonGame.CannonGame;
+import me.WesBag.Toontown.Trolley.Minigames.CannonGame.CannonGameListener;
 import me.WesBag.Toontown.Trolley.Minigames.IceSlide.ISListener;
 import me.WesBag.Toontown.Trolley.Minigames.IceSlide.IceSlide;
+import me.WesBag.Toontown.Trolley.Minigames.IceSlide.IceSlideListener;
+import me.WesBag.Toontown.Trolley.Minigames.TagGame.ToonTagListener;
 import me.WesBag.Toontown.Trolley.Utilities.GameManager;
 import me.WesBag.Toontown.Tutorial.Tutorial;
 import me.blackvein.quests.Quests;
@@ -109,7 +113,7 @@ public class Main extends JavaPlugin implements Listener {
 		getServer().getPluginManager().registerEvents(new Tasks(), this);
 		getServer().getPluginManager().registerEvents(new ToonListener(log), this);
 		getServer().getPluginManager().registerEvents(new GagShopListener(this, log), this);
-		getServer().getPluginManager().registerEvents(new TrolleyListener(), this);
+		getServer().getPluginManager().registerEvents(new NewTrolleyListener(), this);
 		getServer().getPluginManager().registerEvents(new CogBuildingController(this), this);
 		getServer().getPluginManager().registerEvents(new StreetsController(), this);
 		getServer().getPluginManager().registerEvents(new FishingController(), this);
@@ -149,21 +153,25 @@ public class Main extends JavaPlugin implements Listener {
 		getCommand("streets").setExecutor(new StreetsControllerCommand());
 		getCommand("fishing").setExecutor(new FishingBucketMenuCommand());
 		getCommand("changeskin").setExecutor(new ChangeSkin());
+		getCommand("createminigame").setExecutor(new CreateMinigameMenu());
 		//////Minigame Init start!!! (Dont forget to add the minigames in the game manager lists too!!!!)
 		
 		//Cannon Game
-		GameManager.allGames.add(CannonGame.class);
-		Location CG1 = new Location(getServer().getWorld("world"), 10, 60, 10);
-		Location CG2 = new Location(getServer().getWorld("world"), 20, 60, 20);
-		CannonGame.arenasFree.add(CG1);
-		CannonGame.arenasFree.add(CG2);
-		getServer().getPluginManager().registerEvents(new CGListener(), this);
+		GameManager.loadMinigameArenas();
+		//GameManager.allGames.add(CannonGame.class); //Removed for revamped GameManager
+		//Location CG1 = new Location(getServer().getWorld("world"), 10, 60, 10);
+		//Location CG2 = new Location(getServer().getWorld("world"), 20, 60, 20);
+		//CannonGame.arenasFree.add(CG1);
+		//CannonGame.arenasFree.add(CG2); Load arenas from file
+		getServer().getPluginManager().registerEvents(new CannonGameListener(), this);
+		getServer().getPluginManager().registerEvents(new IceSlideListener(), this);
+		getServer().getPluginManager().registerEvents(new ToonTagListener(), this);
 		
 		//Ice Slide
-		GameManager.allGames.add(IceSlide.class);
-		Location IS1 = new Location(getServer().getWorld("world"), 50, 60, 50);
-		IceSlide.arenasFree.add(IS1);
-		getServer().getPluginManager().registerEvents(new ISListener(), this);
+		//GameManager.allGames.add(IceSlide.class);
+		//Location IS1 = new Location(getServer().getWorld("world"), 50, 60, 50);
+		//IceSlide.arenasFree.add(IS1);
+		//getServer().getPluginManager().registerEvents(new ISListener(), this);
 		
 		
 		
